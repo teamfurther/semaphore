@@ -1,14 +1,39 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
+    "name": "teamfurther/semaphore",
+    "description": "Semaphore is a dashboard for viewing Prometheus time series.",
     "keywords": [
-        "framework",
-        "laravel"
+        "further",
+        "furtherdigitalsolutions",
+        "monitoring",
+        "laravel",
+        "prometheus",
+        "semaphore",
+        "server monitoring"
     ],
+    "homepage": "https://github.com/teamfurther/semaphore",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Peter Illés",
+            "email": "peter.illes@gofurther.digital",
+            "homepage": "https://gofurther.digital",
+            "role": "Developer"
+        },
+        {
+            "name": "Csongor Ur",
+            "email": "csongor.ur@gofurther.digital",
+            "homepage": "https://gofurther.digital",
+            "role": "Developer"
+        },
+        {
+            "name": "Norbert Zsombori",
+            "email": "norbert.zsombori@gofurther.digital",
+            "homepage": "https://gofurther.digital",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -23,16 +48,6 @@
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
@@ -45,8 +60,11 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -58,5 +76,12 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -1,6 +1,6 @@
 # Semaphore
 
-Semaphore is an extensible tool which helps you monitor multiple web applications and API's at the same time, built with Laravel, VueJS and Tailwind.
+Semaphore is an extensible tool which helps you monitor multiple web applications or API's at the same time, built with Laravel, VueJS and Tailwind.
 
 Out-of-the-box it can monitor global uptime, performance (CPU, response time, traffic, disk I/O), disk space, SSL certificates and software versions.
 
