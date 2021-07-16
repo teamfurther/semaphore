@@ -15,7 +15,7 @@ const routes = [
     },
     {
         name: 'project',
-        path: '/project/:slug',
+        path: '/project/:instance',
         component: Project,
         meta: {
             title: __('Project')
