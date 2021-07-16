@@ -16,12 +16,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther.digital' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'gofurther.digital' }}"
                             >
                                 gofurther.digital
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther.digital' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'gofurther.digital' }}"
                             >
                                 https://gofurther.digital
                             </router-link>
@@ -60,12 +60,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'centralized.me' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'centralized.me' }}"
                             >
                                 centralized.me
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'centralized.me' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'centralized.me' }}"
                             >
                                 https://centralized.me
                             </router-link>
@@ -98,12 +98,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking.com' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'mybestparking.com' }}"
                             >
                                 mybestparking.com
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking.com' }}"
+                                         v-bind:to="{ name: 'project', params: { instance: 'mybestparking.com' }}"
                             >
                                 https://mybestparking.com
                             </router-link>
@@ -141,9 +141,11 @@
 </template>
 
 <script lang="ts">
-    import Chart from 'chart.js/auto';
+    import { Component } from 'vue-property-decorator';
     import AppMixins from '../mixins';
+    import Chart from 'chart.js/auto';
 
+    @Component
     export default class Dashboard extends AppMixins {
         mounted() {
             // initialize line charts with random data

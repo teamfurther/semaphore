@@ -9,9 +9,10 @@
 </template>
 
 <script lang="ts">
-    import { Prop, Vue } from 'vue-property-decorator'
+    import { Component, Prop, Vue } from 'vue-property-decorator';
     import Chart, { ChartItem } from 'chart.js/auto';
 
+    @Component
     export default class Uptime extends Vue {
         mounted() {
             // initialize chart with random data

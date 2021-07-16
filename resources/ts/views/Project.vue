@@ -32,59 +32,66 @@
     </div>
 </template>
 
-<script>
-    import Eol from '../check_types/Eol';
-    import Gauge from '../check_types/Gauge';
-    import Trend from '../check_types/Trend';
-    import Uptime from '../check_types/Uptime';
-    import Value from '../check_types/Value';
+<script lang="ts">
+    import { Component } from 'vue-property-decorator';
+    import AppMixins from '../mixins';
+    import Eol from "../check_types/Eol.vue";
+    import Gauge from '../check_types/Gauge.vue';
+    import Trend from '../check_types/Trend.vue';
+    import Uptime from '../check_types/Uptime.vue';
+    import Value from '../check_types/Value.vue';
 
-    export default {
+    @Component({
         components: {
-            Eol, Gauge, Trend, Uptime, Value
+            Eol,
+            Gauge,
+            Trend,
+            Uptime,
+            Value,
         },
-        data: function() {
-            return {
-                config: {},
-                instance: this.$route.params.instance,
-                rows: [null]
-            }
-        },
-        methods: {
-            getChecksByZone: function (zone, row = null) {
-                let checks = Object.values(this.config.checks).filter((val) => {
-                    if (val.panel.zone === zone && (row === null || val.panel.row === row)) {
-                        return val;
-                    }
-                });
+    })
+    export default class Project extends AppMixins {
+        private config: { [key: string]: any } = {};
+        private instance =  this.$route.params.instance;
+        private rows = [null];
 
-                return checks.sort((a, b) => a.panel.order - b.panel.order);
-            },
-            getConfig: function () {
-                const configFile = require('@root/semaphore.config.js');
-
-                this.config = configFile.find((val) => {
-                    if (val.instance === this.instance) {
-                        return val;
-                    }
-                });
-            },
-            getNumberOfRows: function () {
-                let maxRows = 0;
-
-                Object.values(this.config.checks).forEach((val) => {
-                    if (typeof val.panel.row !== 'undefined' && val.panel.row > maxRows) {
-                        maxRows = val.panel.row;
-                    }
-                });
-
-                return maxRows + 1;
-            }
-        },
-        mounted: function() {
+        mounted() {
             this.getConfig();
 
             this.rows = [...Array(this.getNumberOfRows())].fill(null);
+        }
+
+        // Methods
+        getChecksByZone(zone: string, row = null) {
+            let checks = Object.values(this.config.checks).filter((val: any) => {
+                if (val.panel.zone === zone && (row === null || val.panel.row === row)) {
+                    return val;
+                }
+            });
+
+            return checks.sort((a: any, b: any) => a.panel.order - b.panel.order);
+        }
+
+        getConfig() {
+            const configFile = require('@root/semaphore.config.js');
+
+            this.config = configFile.find((val: any) => {
+                if (val.instance === this.instance) {
+                    return val;
+                }
+            });
+        }
+
+        getNumberOfRows() {
+            let maxRows = 0;
+
+            Object.values(this.config.checks).forEach((val: any) => {
+                if (typeof val.panel.row !== 'undefined' && val.panel.row > maxRows) {
+                    maxRows = val.panel.row;
+                }
+            });
+
+            return maxRows + 1;
         }
     }
 </script>
