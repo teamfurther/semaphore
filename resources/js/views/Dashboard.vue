@@ -16,12 +16,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther_digital' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther.digital' }}"
                             >
                                 gofurther.digital
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther_digital' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'gofurther.digital' }}"
                             >
                                 https://gofurther.digital
                             </router-link>
@@ -60,12 +60,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'centralized_me' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'centralized.me' }}"
                             >
                                 centralized.me
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'centralized_me' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'centralized.me' }}"
                             >
                                 https://centralized.me
                             </router-link>
@@ -98,12 +98,12 @@
                     <tr>
                         <td>
                             <router-link class="block font-bold"
-                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking_com' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking.com' }}"
                             >
                                 mybestparking.com
                             </router-link>
                             <router-link class="text-gray-400"
-                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking_com' }}"
+                                         v-bind:to="{ name: 'project', params: { slug: 'mybestparking.com' }}"
                             >
                                 https://mybestparking.com
                             </router-link>

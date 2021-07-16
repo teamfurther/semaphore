@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('tailwindcss'),
     ])
     .copyDirectory('resources/images', 'public/images', false);
+
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            '@root': path.resolve(__dirname, '')
+        }
+    }
+});

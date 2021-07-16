@@ -1,29 +1,32 @@
 <template>
-    <div class="view view--project">
+    <div class="view view--project" v-if="config">
         <div class="mb-8">
-            <h1 class="text-2xl">gofurther.digital</h1>
-            <h2 class="text-gray-400 text-sm">https://gofurther.digital</h2>
+            <h1 class="text-2xl" v-html="config.name"></h1>
+            <h2 class="text-gray-400 text-sm" v-html="config.url"></h2>
         </div>
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-3 gap-4" v-if="config.checks">
             <div class="col-span-2">
-                <div class="grid grid-cols-6 gap-4 mb-12">
-                    <uptime class="col-span-3" metric="semaphore_global_uptime" v-bind:title="__('Global Uptime')"></uptime>
-                    <gauge class="col-span-3" metric="semaphore_disk_usage" v-bind:title="__('Disk Usage')"></gauge>
-                    <trend class="col-span-3" metric="semaphore_cpu_usage" v-bind:title="__('CPU Usage')"></trend>
-                    <trend class="col-span-3" metric="semaphore_memory_usage" v-bind:title="__('Memory Usage')"></trend>
-                    <trend class="col-span-3" metric="semaphore_response_time" v-bind:title="__('Server Response Time')"></trend>
-                    <trend class="col-span-3" metric="semaphore_disk_io" v-bind:title="__('Disk IO')"></trend>
-                </div>
-                <div class="grid grid-cols-6 gap-4">
-                    <uptime class="col-span-2" metric="semaphore_ssl_status" v-bind:title="__('SSL Status')"></uptime>
-                    <uptime class="col-span-2" metric="semaphore_nginx_status" v-bind:title="__('nginx Status')"></uptime>
-                    <uptime class="col-span-2" metric="semaphore_mysql_status" v-bind:title="__('MySQL Status')"></uptime>
+                <div class="grid grid-cols-6 gap-4"
+                     v-bind:class="{ 'mb-12' : row < rows.length - 1 }"
+                     v-for="(val, row) in rows"
+                >
+                    <component v-bind:class="check.panel.class"
+                               v-bind:is="check.type"
+                               v-bind:key="check.metric"
+                               v-bind:metric="check.metric"
+                               v-bind:title="check.panel.title"
+                               v-for="check in getChecksByZone('main', row)"
+                    ></component>
                 </div>
             </div>
             <div class="col-span-1">
-                <eol class="mb-4" metric="semaphore_end_of_life" v-bind:title="__('End of Life')"></eol>
-                <value class="mb-4" metric="semaphore_last_db_backup" v-bind:title="__('Last Backup (DB)')"></value>
-                <value metric="semaphore_last_file_backup" v-bind:title="__('Last Backup (Files)')"></value>
+                <component v-bind:class="check.panel.class"
+                           v-bind:is="check.type"
+                           v-bind:key="check.metric"
+                           v-bind:metric="check.metric"
+                           v-bind:title="check.panel.title"
+                           v-for="check in getChecksByZone('sidebar')"
+                ></component>
             </div>
         </div>
     </div>
@@ -39,6 +42,49 @@
     export default {
         components: {
             Eol, Gauge, Trend, Uptime, Value
+        },
+        data: function() {
+            return {
+                config: {},
+                instance: this.$route.params.instance,
+                rows: [null]
+            }
+        },
+        methods: {
+            getChecksByZone: function (zone, row = null) {
+                let checks = Object.values(this.config.checks).filter((val) => {
+                    if (val.panel.zone === zone && (row === null || val.panel.row === row)) {
+                        return val;
+                    }
+                });
+
+                return checks.sort((a, b) => a.panel.order - b.panel.order);
+            },
+            getConfig: function () {
+                const configFile = require('@root/semaphore.config.js');
+
+                this.config = configFile.find((val) => {
+                    if (val.instance === this.instance) {
+                        return val;
+                    }
+                });
+            },
+            getNumberOfRows: function () {
+                let maxRows = 0;
+
+                Object.values(this.config.checks).forEach((val) => {
+                    if (typeof val.panel.row !== 'undefined' && val.panel.row > maxRows) {
+                        maxRows = val.panel.row;
+                    }
+                });
+
+                return maxRows + 1;
+            }
+        },
+        mounted: function() {
+            this.getConfig();
+
+            this.rows = [...Array(this.getNumberOfRows())].fill(null);
         }
     }
 </script>
