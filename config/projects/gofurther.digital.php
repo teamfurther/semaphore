@@ -6,7 +6,7 @@ return [
     'name' => 'gofurther.digital',
     'url' => 'https://gofurther.digital',
 
-    'check_types' => [
+    'checks' => [
         'cpu_usage' => [
             'panel' => [
                 'class' => 'col-span-3',
