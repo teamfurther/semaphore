@@ -1,5 +1,5 @@
 <template>
-    <div class="panel">
+    <div class="panel pb-12 relative">
         <div class="panel--title" v-html="title"></div>
         <table>
             <tbody>
@@ -95,6 +95,7 @@
                 </tr>
             </tbody>
         </table>
+        <div class="bottom-4 absolute text-xs text-gray-400">Current data</div>
     </div>
 </template>
 

@@ -1,10 +1,11 @@
 <template>
-    <div class="panel">
+    <div class="panel pb-12 relative">
         <div class="panel--title" v-html="title"></div>
         <div class="mb-4 text-tangerine text-4xl">
             <span class="badge bg-tangerine"></span> 97%
         </div>
         <canvas class="chart-line" height="60" v-bind:id="metric"></canvas>
+        <div class="bottom-4 absolute text-xs text-gray-400">Period: 16.07.2020 - 23.07.2020</div>
     </div>
 </template>
 

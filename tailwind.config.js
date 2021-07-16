@@ -3,6 +3,7 @@ module.exports = {
   purge: [
     './resources/views/**/*.blade.php',
     './resources/ts/**/*.{js,jsx,ts,tsx,vue}',
+    './semaphore.config.js',
   ],
   theme: {
     extend: {

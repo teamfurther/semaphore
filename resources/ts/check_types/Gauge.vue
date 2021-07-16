@@ -1,5 +1,5 @@
 <template>
-    <div class="panel">
+    <div class="panel pb-12 relative">
         <div class="panel--title" v-html="title"></div>
         <div class="grid grid-cols-2 gap-4">
             <div class="relative">
@@ -17,6 +17,7 @@
                 <span class="text-xs text-gray-400">/var/remote_backups</span>
             </div>
         </div>
+        <div class="bottom-4 absolute text-xs text-gray-400">Current data</div>
     </div>
 </template>
 
