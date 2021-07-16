@@ -3,14 +3,14 @@
         <div class="panel--title" v-html="title"></div>
         <div class="grid grid-cols-2 gap-4">
             <div class="relative">
-                <canvas class="chart-doughnut mb-2" height="30" v-bind:id="metric"></canvas>
+                <canvas class="chart-doughnut mb-2" height="30" v-bind:id="id"></canvas>
                 <span class="absolute flex items-center left-1/2 text-tangerine text-4xl top-2/3 transform -translate-x-1/2 -translate-y-1/2">
                     82%
                 </span>
                 <span class="text-xs text-gray-400">/</span>
             </div>
             <div class="relative">
-                <canvas class="chart-doughnut mb-2" height="50" v-bind:id="metric"></canvas>
+                <canvas class="chart-doughnut mb-2" height="50" v-bind:id="id"></canvas>
                 <span class="absolute flex items-center left-1/2 text-pearl text-4xl top-2/3 transform -translate-x-1/2 -translate-y-1/2">
                     52%
                 </span>
@@ -54,6 +54,11 @@
         }
 
         // Props
+        @Prop({
+            required: true,
+            type: String,
+        }) id!: string;
+
         @Prop({
             required: true,
             type: String,

@@ -11,8 +11,9 @@
                      v-for="(val, row) in rows"
                 >
                     <component v-bind:class="check.panel.class"
-                               v-bind:is="check.type"
-                               v-bind:key="check.metric"
+                               v-bind:id="check.id"
+                               v-bind:is="check.widget"
+                               v-bind:key="check.id"
                                v-bind:metric="check.metric"
                                v-bind:title="check.panel.title"
                                v-for="check in getChecksByZone('main', row)"
@@ -21,8 +22,9 @@
             </div>
             <div class="col-span-1">
                 <component v-bind:class="check.panel.class"
-                           v-bind:is="check.type"
-                           v-bind:key="check.metric"
+                           v-bind:id="check.id"
+                           v-bind:is="check.widget"
+                           v-bind:key="check.id"
                            v-bind:metric="check.metric"
                            v-bind:title="check.panel.title"
                            v-for="check in getChecksByZone('sidebar')"
@@ -63,7 +65,7 @@
 
         // Methods
         getChecksByZone(zone: string, row = null) {
-            let checks = Object.values(this.config.checks).filter((val: any) => {
+            let checks = this.config.checks.filter((val: any) => {
                 if (val.panel.zone === zone && (row === null || val.panel.row === row)) {
                     return val;
                 }
@@ -85,7 +87,7 @@
         getNumberOfRows() {
             let maxRows = 0;
 
-            Object.values(this.config.checks).forEach((val: any) => {
+            this.config.checks.forEach((val: any) => {
                 if (typeof val.panel.row !== 'undefined' && val.panel.row > maxRows) {
                     maxRows = val.panel.row;
                 }

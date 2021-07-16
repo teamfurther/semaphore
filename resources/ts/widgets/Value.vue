@@ -17,6 +17,11 @@ export default class Value extends Vue {
     @Prop({
         required: true,
         type: String,
+    }) id!: string;
+
+    @Prop({
+        required: true,
+        type: String,
     }) metric!: string;
 
     @Prop({

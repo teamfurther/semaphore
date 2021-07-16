@@ -4,7 +4,7 @@
         <div class="mb-4 text-tangerine text-4xl">
             <span class="badge bg-tangerine"></span> 97%
         </div>
-        <canvas class="chart-line" height="60" v-bind:id="metric"></canvas>
+        <canvas class="chart-line" height="60" v-bind:id="id"></canvas>
         <div class="bottom-4 absolute text-xs text-gray-400">Period: 16.07.2020 - 23.07.2020</div>
     </div>
 </template>
@@ -17,7 +17,7 @@
     export default class Uptime extends Vue {
         mounted() {
             // initialize chart with random data
-            let chart = new Chart(<ChartItem> document.querySelector('#' + this.metric), {
+            let chart = new Chart(<ChartItem> document.querySelector('#' + this.id), {
                 data: {
                     datasets: [{
                         data: [...Array(30)].map((val, key) => key !== 17),
@@ -56,6 +56,11 @@
         }
 
         // Props
+        @Prop({
+            required: true,
+            type: String,
+        }) id!: string;
+
         @Prop({
             required: true,
             type: String,

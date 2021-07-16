@@ -4,8 +4,9 @@ module.exports = [
     "name": "gofurther.digital",
     "url": "https://gofurther.digital",
     "alerts": [],
-    "checks": {
-      "cpu_usage": {
+    "checks": [
+      {
+        "id": "cpu_usage",
         "panel": {
           "class": "col-span-3",
           "order": 2,
@@ -14,9 +15,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_cpu_usage",
-        "type": "trend"
+        "widget": "trend"
       },
-      "disk_io": {
+      {
+        "id": "disk_io",
         "panel": {
           "class": "col-span-3",
           "order": 6,
@@ -25,9 +27,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_disk_io",
-        "type": "trend"
+        "widget": "trend"
       },
-      "disk_usage": {
+      {
+        "id": "disk_usage",
         "panel": {
           "class": "col-span-3",
           "order": 1,
@@ -36,9 +39,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_disk_usage",
-        "type": "gauge"
+        "widget": "gauge"
       },
-      "end_of_life": {
+      {
+        "id": "end_of_life",
         "panel": {
           "class": "mb-4",
           "order": 0,
@@ -46,9 +50,10 @@ module.exports = [
           "zone": "sidebar"
         },
         "metric": "semaphore_end_of_life",
-        "type": "eol"
+        "widget": "eol"
       },
-      "global_uptime": {
+      {
+        "id": "global_uptime",
         "panel": {
           "class": "col-span-3",
           "order": 0,
@@ -57,9 +62,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_global_uptime",
-        "type": "uptime"
+        "widget": "uptime"
       },
-      "last_db_backup": {
+      {
+        "id": "last_db_backup",
         "panel": {
           "class": "mb-4",
           "order": 1,
@@ -67,18 +73,20 @@ module.exports = [
           "zone": "sidebar"
         },
         "metric": "semaphore_last_db_backup",
-        "type": "value"
+        "widget": "value"
       },
-      "last_file_backup": {
+      {
+        "id": "last_file_backup",
         "panel": {
           "order": 2,
           "title": "Last Backup (Files)",
           "zone": "sidebar"
         },
         "metric": "semaphore_last_file_backup",
-        "type": "value"
+        "widget": "value"
       },
-      "memory_usage": {
+      {
+        "id": "memory_usage",
         "panel": {
           "class": "col-span-3",
           "order": 3,
@@ -87,9 +95,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_memory_usage",
-        "type": "trend"
+        "widget": "trend"
       },
-      "mysql_status": {
+      {
+        "id": "mysql_status",
         "panel": {
           "class": "col-span-2",
           "order": 2,
@@ -98,9 +107,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_mysql_status",
-        "type": "uptime"
+        "widget": "uptime"
       },
-      "nginx_status": {
+      {
+        "id": "nginx_status",
         "panel": {
           "class": "col-span-2",
           "order": 1,
@@ -109,9 +119,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_nginx_status",
-        "type": "uptime"
+        "widget": "uptime"
       },
-      "response_time": {
+      {
+        "id": "response_time",
         "panel": {
           "class": "col-span-3",
           "order": 5,
@@ -120,9 +131,10 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_response_time",
-        "type": "trend"
+        "widget": "trend"
       },
-      "ssl_status": {
+      {
+        "id": "ssl_status",
         "panel": {
           "class": "col-span-2",
           "order": 0,
@@ -131,8 +143,8 @@ module.exports = [
           "zone": "main"
         },
         "metric": "semaphore_ssl_status",
-        "type": "uptime"
+        "widget": "uptime"
       }
-    }
+    ]
   }
 ];
