@@ -14,27 +14,27 @@ use Illuminate\Support\Manager;
 
 class CheckTypeManager extends Manager
 {
-    public function getEolDriver(): CheckType
+    public function createEolDriver(): CheckType
     {
         return resolve(Eol::class);
     }
 
-    public function getGaugeDriver(): CheckType
+    public function createGaugeDriver(): CheckType
     {
         return resolve(Gauge::class);
     }
 
-    public function getTrendDriver(): CheckType
+    public function createTrendDriver(): CheckType
     {
         return resolve(Trend::class);
     }
 
-    public function getUptimeDriver(): CheckType
+    public function createUptimeDriver(): CheckType
     {
         return resolve(Uptime::class);
     }
 
-    public function getValueDriver(): CheckType
+    public function createValueDriver(): CheckType
     {
         return resolve(Value::class);
     }

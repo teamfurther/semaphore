@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Http\Api\Controllers;
+
 use App\Managers\CheckTypeManager;
+use Illuminate\Http\Request;
 
 class DataController
 {
@@ -11,8 +14,8 @@ class DataController
         $this->checkType = resolve(CheckTypeManager::class);
     }
 
-    public function index(string $type)
+    public function index(string $type, Request $request)
     {
-        return $this->checkType->driver($type)->response();
+        return $this->checkType->driver($type)->response($request);
     }
 }
