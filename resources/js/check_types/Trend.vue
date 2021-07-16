@@ -1,0 +1,83 @@
+<template>
+    <div class="panel">
+        <div class="panel--title" v-html="title"></div>
+        <canvas class="chart-line" height="100" v-bind:id="metric"></canvas>
+    </div>
+</template>
+
+<script>
+    import Chart from 'chart.js/auto';
+
+    export default {
+        mounted: function() {
+            // initialize chart with random data
+            let chart = new Chart(document.querySelector('#' + this.metric), {
+                data: {
+                    datasets: [{
+                        borderColor: '#ffb04e',
+                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
+                        label: 'prometheus',
+                        pointHoverRadius: 0,
+                        pointRadius: 0,
+                        showLine: false
+                    }, {
+                        borderColor: '#f7086e',
+                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
+                        label: 'top',
+                        pointHoverRadius: 0,
+                        pointRadius: 0,
+                        showLine: false
+                    }, {
+                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
+                        label: 'TOTAL'
+                    }],
+                    labels: [...Array(30)].map((val, key) => key + 1)
+                },
+                options: {
+                    elements: {
+                        line: {
+                            borderWidth: 1
+                        },
+                        point: {
+                            radius: 2
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    plugins: {
+                        tooltip: {
+                            bodyFont: {
+                                family: 'monospace'
+                            },
+                            callbacks: {
+                                label: function(chart) {
+                                    return String(chart.parsed.y).padStart(3, ' ') + '% - ' + chart.dataset.label;
+                                }
+                            },
+                            position: 'nearest'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            max: 100,
+                            min: 0
+                        },
+                    },
+                },
+                type: 'line'
+            });
+        },
+        props: {
+            metric: {
+                required: true,
+                type: String
+            },
+            title: {
+                required: true,
+                type: String
+            }
+        }
+    }
+</script>

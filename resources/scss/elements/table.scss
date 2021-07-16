@@ -1,0 +1,21 @@
+table {
+    @apply table-fixed text-left text-xs w-full;
+}
+
+tbody {
+    @apply divide-gray-100 divide-y;
+}
+
+td {
+    padding: 3px 10px;
+}
+
+th {
+    @apply bg-gray-50 border-b border-gray-100 font-medium text-gray-400;
+    padding: 5px 10px 3px;
+    width: 12%;
+}
+
+th:first-child {
+    width: 20%;
+}

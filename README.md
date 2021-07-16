@@ -1,10 +1,10 @@
 # Semaphore
 
-Semaphore is an extensible tool which helps you monitor multiple web applications or API's at the same time, built with Laravel, VueJS and Tailwind.
+Semaphore is an extensible dashboard for viewing Prometheus time series, built with Laravel, Tailwind and VueJS.
 
-Out-of-the-box it can monitor global uptime, performance (CPU, response time, traffic, disk I/O), disk space, SSL certificates and software versions.
+Out-of-the-box it can monitor global uptime, performance (CPU, memory usage, disk I/O), disk space, SSL certificates and software versions.
 
-Semaphore also allows you to configure notifications, which can be set when certain values pass a preset threshold or variance.
+Semaphore also allows you to configure notifications, which can be set when certain values pass a preset threshold.
 
 ## Installation
 
@@ -12,11 +12,15 @@ You can install the package via composer:
 
 ```composer require teamfurther/semaphore```
 
+### Setting up Prometheus and Pushgateway
+
 ## Configuration
 
-### Projects
+### Main dashboard
 
-### Checks
+### Project dashboards
+
+### Alerts
 
 ## Credits
 

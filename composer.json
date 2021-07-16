@@ -1,6 +1,6 @@
 {
     "name": "teamfurther/semaphore",
-    "description": "Semaphore is a dashboard for viewing Prometheus time series.",
+    "description": "Semaphore is an extensible dashboard for viewing Prometheus time series.",
     "keywords": [
         "further",
         "furtherdigitalsolutions",

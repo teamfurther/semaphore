@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/{vue_capture?}', 'app')->where('vue_capture', '^(?!api).*$')->name('index');
