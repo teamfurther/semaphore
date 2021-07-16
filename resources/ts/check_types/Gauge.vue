@@ -20,11 +20,12 @@
     </div>
 </template>
 
-<script>
-    import Chart from "chart.js/auto";
+<script lang="ts">
+    import { Prop, Vue } from 'vue-property-decorator'
+    import Chart from 'chart.js/auto';
 
-    export default {
-        mounted: function() {
+    export default class Gauge extends Vue {
+        mounted() {
             // initialize donut charts with data
             [].forEach.call(document.querySelectorAll('.chart-doughnut'), function(e, i) {
                 let chart = new Chart(e, {
@@ -48,16 +49,17 @@
                     type: 'doughnut'
                 });
             });
-        },
-        props: {
-            metric: {
-                required: true,
-                type: String
-            },
-            title: {
-                required: true,
-                type: String
-            }
         }
-    }
+
+        // Props
+        @Prop({
+            required: true,
+            type: String,
+        }) metric!: string;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) title!: string;
+    };
 </script>

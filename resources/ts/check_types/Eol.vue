@@ -98,17 +98,19 @@
     </div>
 </template>
 
-<script>
-    export default {
-        props: {
-            metric: {
-                required: true,
-                type: String
-            },
-            title: {
-                required: true,
-                type: String
-            }
-        }
-    }
+<script lang="ts">
+    import { Prop, Vue } from 'vue-property-decorator'
+
+    export default class Eol extends Vue {
+        // Props
+        @Prop({
+            required: true,
+            type: String,
+        }) metric!: string;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) title!: string;
+    };
 </script>

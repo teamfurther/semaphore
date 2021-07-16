@@ -5,13 +5,14 @@
     </div>
 </template>
 
-<script>
-    import Chart from 'chart.js/auto';
+<script lang="ts">
+    import { Prop, Vue } from 'vue-property-decorator'
+    import Chart, { ChartItem } from 'chart.js/auto';
 
-    export default {
-        mounted: function() {
+    export default class Trend extends Vue {
+        mounted() {
             // initialize chart with random data
-            let chart = new Chart(document.querySelector('#' + this.metric), {
+            let chart = new Chart(<ChartItem> document.querySelector('#' + this.metric), {
                 data: {
                     datasets: [{
                         borderColor: '#ffb04e',
@@ -68,16 +69,17 @@
                 },
                 type: 'line'
             });
-        },
-        props: {
-            metric: {
-                required: true,
-                type: String
-            },
-            title: {
-                required: true,
-                type: String
-            }
         }
-    }
+
+        // Props
+        @Prop({
+            required: true,
+            type: String,
+        }) metric!: string;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) title!: string;
+    };
 </script>

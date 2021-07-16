@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
     "/images/logo-knockout.ai": "/images/logo-knockout.ai",
     "/images/logo-knockout.svg": "/images/logo-knockout.svg",
-    "/images/logo.ai": "/images/logo.ai",
-    "/css/app.css": "/css/app.css"
+    "/images/logo.ai": "/images/logo.ai"
 }

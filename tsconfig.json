@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        // if using webpack 2+ or rollup, to leverage tree shaking:
+        "module": "es2015",
+        "moduleResolution": "node",
+        // this enables stricter inference for data properties on `this`
+        "strict": true,
+        // this aligns with Vue's browser support
+        "target": "es5",
+        "allowSyntheticDefaultImports": true
+    },
+    "lib": [
+        "esnext",
+        "dom",
+        "dom.iterable",
+        "scripthost"
+    ],
+    "include": [
+        "resources/ts/**/*.ts",
+        "resources/ts/**/*.tsx",
+        "resources/ts/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

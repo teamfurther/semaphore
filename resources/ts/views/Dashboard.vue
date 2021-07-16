@@ -140,11 +140,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import Chart from 'chart.js/auto';
+    import AppMixins from '../mixins';
 
-    export default {
-        mounted: function() {
+    export default class Dashboard extends AppMixins {
+        mounted() {
             // initialize line charts with random data
             [].forEach.call(document.querySelectorAll('.chart-line'), function(e) {
                 let chart = new Chart(e, {
@@ -180,5 +181,5 @@
                 });
             });
         }
-    }
+    };
 </script>
