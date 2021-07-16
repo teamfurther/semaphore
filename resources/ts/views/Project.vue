@@ -35,11 +35,11 @@
 <script lang="ts">
     import { Component } from 'vue-property-decorator';
     import AppMixins from '../mixins';
-    import Eol from "../check_types/Eol.vue";
-    import Gauge from '../check_types/Gauge.vue';
-    import Trend from '../check_types/Trend.vue';
-    import Uptime from '../check_types/Uptime.vue';
-    import Value from '../check_types/Value.vue';
+    import Eol from "../widgets/Eol.vue";
+    import Gauge from '../widgets/Gauge.vue';
+    import Trend from '../widgets/Trend.vue';
+    import Uptime from '../widgets/Uptime.vue';
+    import Value from '../widgets/Value.vue';
 
     @Component({
         components: {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\CheckTypes;
+namespace App\Widgets;
 
 use Illuminate\Http\Request;
 
-class Uptime extends CheckType
+class Value extends Widget
 {
     public function response(Request $request)
     {

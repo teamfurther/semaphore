@@ -1,13 +1,13 @@
 <?php
 
-namespace App\CheckTypes;
+namespace App\Widgets;
 
 use Illuminate\Http\Request;
 
-class Value extends CheckType
+class Eol extends Widget
 {
     public function response(Request $request)
     {
-        
+
     }
 }

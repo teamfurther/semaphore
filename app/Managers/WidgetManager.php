@@ -3,38 +3,38 @@
 
 namespace App\Managers;
 
-use App\CheckTypes\CheckType;
-use App\CheckTypes\Eol;
-use App\CheckTypes\Gauge;
-use App\CheckTypes\Trend;
-use App\CheckTypes\Uptime;
-use App\CheckTypes\Value;
+use App\Widgets\Widget;
+use App\Widgets\Eol;
+use App\Widgets\Gauge;
+use App\Widgets\Trend;
+use App\Widgets\Uptime;
+use App\Widgets\Value;
 use Exception;
 use Illuminate\Support\Manager;
 
-class CheckTypeManager extends Manager
+class WidgetManager extends Manager
 {
-    public function createEolDriver(): CheckType
+    public function createEolDriver(): Widget
     {
         return resolve(Eol::class);
     }
 
-    public function createGaugeDriver(): CheckType
+    public function createGaugeDriver(): Widget
     {
         return resolve(Gauge::class);
     }
 
-    public function createTrendDriver(): CheckType
+    public function createTrendDriver(): Widget
     {
         return resolve(Trend::class);
     }
 
-    public function createUptimeDriver(): CheckType
+    public function createUptimeDriver(): Widget
     {
         return resolve(Uptime::class);
     }
 
-    public function createValueDriver(): CheckType
+    public function createValueDriver(): Widget
     {
         return resolve(Value::class);
     }

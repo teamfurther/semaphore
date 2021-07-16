@@ -1,10 +1,10 @@
 <?php
 
-namespace App\CheckTypes;
+namespace App\Widgets;
 
 use Illuminate\Http\Request;
 
-class Gauge extends CheckType
+class Uptime extends Widget
 {
     public function response(Request $request)
     {

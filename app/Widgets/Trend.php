@@ -1,12 +1,12 @@
 <?php
 
-namespace App\CheckTypes;
+namespace App\Widgets;
 
 use App\Actions\Trend\GetTrendFromPrometheusAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class Trend extends CheckType
+class Trend extends Widget
 {
     private GetTrendFromPrometheusAction $getTrendFromPrometheusAction;
 
