@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Api\Controllers\DataController;
+use App\Http\Api\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('data/{type}', [DataController::class, 'index'])->name('data');
+Route::get('notification', [NotificationController::class, 'notify'])->name('notification');

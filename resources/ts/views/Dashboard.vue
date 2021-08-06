@@ -1,5 +1,7 @@
 <template>
     <div class="view view--dashboard">
+        <interval-changer class="mb-3"></interval-changer>
+
         <div class="flex panel">
             <table>
                 <thead>
@@ -144,8 +146,13 @@
     import { Component } from 'vue-property-decorator';
     import AppMixins from '../mixins';
     import Chart from 'chart.js/auto';
+    import IntervalChanger from '../components/IntervalChanger.vue';
 
-    @Component
+    @Component({
+        components: {
+            IntervalChanger
+        }
+    })
     export default class Dashboard extends AppMixins {
         mounted() {
             // initialize line charts with random data

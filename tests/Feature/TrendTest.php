@@ -8,13 +8,6 @@ use Tests\TestCase;
 
 class TrendTest extends TestCase
 {
-    public function testStatusCode()
-    {
-        $response = $this->json('GET', route('data', ['type' => 'trend']));
-
-        $response->assertStatus(200);
-    }
-
     public function testContent()
     {
         $result = [

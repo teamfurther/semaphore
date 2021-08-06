@@ -17,6 +17,8 @@
                                v-bind:metric="check.metric"
                                v-bind:title="check.panel.title"
                                v-for="check in getChecksByZone('main', row)"
+                               v-bind:start="1628162299"
+                               v-bind:end="1628251129"
                     ></component>
                 </div>
             </div>
@@ -28,6 +30,8 @@
                            v-bind:metric="check.metric"
                            v-bind:title="check.panel.title"
                            v-for="check in getChecksByZone('sidebar')"
+                           v-bind:start="1628162299"
+                           v-bind:end="1628251129"
                 ></component>
             </div>
         </div>
@@ -36,6 +40,7 @@
 
 <script lang="ts">
     import { Component } from 'vue-property-decorator';
+    import { ConfigType } from "../types/ConfigType";
     import AppMixins from '../mixins';
     import Eol from "../widgets/Eol.vue";
     import Gauge from '../widgets/Gauge.vue';
@@ -53,7 +58,7 @@
         },
     })
     export default class Project extends AppMixins {
-        private config: { [key: string]: any } = {};
+        private config: Partial<ConfigType> = {};
         private instance =  this.$route.params.instance;
         private rows = [null];
 
@@ -65,6 +70,10 @@
 
         // Methods
         getChecksByZone(zone: string, row = null) {
+            if (!this.config.checks) {
+                return [];
+            }
+
             let checks = this.config.checks.filter((val: any) => {
                 if (val.panel.zone === zone && (row === null || val.panel.row === row)) {
                     return val;
@@ -86,6 +95,10 @@
 
         getNumberOfRows() {
             let maxRows = 0;
+
+            if (!this.config.checks) {
+                return maxRows;
+            }
 
             this.config.checks.forEach((val: any) => {
                 if (typeof val.panel.row !== 'undefined' && val.panel.row > maxRows) {

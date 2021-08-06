@@ -1,0 +1,18 @@
+export default [
+    { title: 'Last 5 minutes' },
+    { title: 'Last 15 minutes' },
+    { title: 'Last 30 minutes' },
+    { title: 'Last 1 hour' },
+    { title: 'Last 3 hours' },
+    { title: 'Last 6 hours' },
+    { title: 'Last 12 hours' },
+    { title: 'Last 24 hours' },
+    { title: 'Last 2 days' },
+    { title: 'Last 7 hours' },
+    { title: 'Last 30 hours' },
+    { title: 'Last 90 hours' },
+    { title: 'Last 6 months' },
+    { title: 'Last 1 year' },
+    { title: 'Last 2 years' },
+    { title: 'Last 5 years' },
+];

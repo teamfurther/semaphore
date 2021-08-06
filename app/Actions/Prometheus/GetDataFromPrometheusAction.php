@@ -3,11 +3,33 @@
 namespace App\Actions\Prometheus;
 
 use App\Actions\ActionInterface;
+use App\Http\Requests\DataRequest;
+use GuzzleHttp\Client;
 
 class GetDataFromPrometheusAction implements ActionInterface
 {
-    public function execute(...$args)
+    private Client $client;
+
+    public function __construct()
     {
-        return 1;
+        $this->client = resolve(Client::class);
+    }
+
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function execute(...$args): array
+    {
+        /** @var DataRequest $data */
+        $data = $args[0];
+
+        $metric = $data->get('metric');
+        $start = $data->get('start');
+        $end = $data->get('end');
+        $url = config('prometheus.api_end_point') . '?query=' . $metric . '&start=' . $start . '&end=' . $end . '&step=' . config('prometheus.step');
+
+        return json_decode($this->client->get($url)
+            ->getBody()
+            ->getContents(), true);
     }
 }
