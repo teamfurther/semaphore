@@ -2,8 +2,8 @@
 
 namespace App\Http\Api\Controllers;
 
+use App\Http\Requests\DataRequest;
 use App\Managers\WidgetManager;
-use Illuminate\Http\Request;
 
 class DataController
 {
@@ -14,7 +14,7 @@ class DataController
         $this->widget = resolve(WidgetManager::class);
     }
 
-    public function index(string $type, Request $request)
+    public function index(string $type, DataRequest $request)
     {
         return $this->widget->driver($type)->response($request);
     }

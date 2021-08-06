@@ -5,6 +5,7 @@ namespace App\Actions\Trend;
 use App\Actions\ActionInterface;
 use App\Actions\Prometheus\GetDataFromPrometheusAction;
 use App\DataTransferObjects\TrendDTO;
+use App\Http\Requests\DataRequest;
 use App\Transformers\TrendTransformer;
 
 class GetTrendFromPrometheusAction implements ActionInterface
@@ -19,11 +20,11 @@ class GetTrendFromPrometheusAction implements ActionInterface
     }
 
     /**
-     * @param string $data
+     * @param DataRequest $data
      * @return TrendDTO[]
      */
     public function execute($data = null): array
     {
-        return $this->trendTransformer->transform($this->getDataFromPrometheusAction->execute());
+        return $this->trendTransformer->transform($this->getDataFromPrometheusAction->execute($data));
     }
 }
