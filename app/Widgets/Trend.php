@@ -17,7 +17,7 @@ class Trend extends Widget
 
     public function response(Request $request): JsonResponse
     {
-        $data = $this->getTrendFromPrometheusAction->execute();
+        $data = $this->getTrendFromPrometheusAction->execute($request);
 
         return response()->json([
             'status' => 'success',
