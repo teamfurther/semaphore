@@ -6,7 +6,7 @@ use App\Actions\ActionInterface;
 
 class GetDataFromPrometheusAction implements ActionInterface
 {
-    public function execute($data = null)
+    public function execute(...$args)
     {
         return 1;
     }

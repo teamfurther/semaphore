@@ -4,5 +4,5 @@ namespace App\Actions;
 
 interface ActionInterface
 {
-    public function execute($data = null);
+    public function execute(...$args);
 }

@@ -12,6 +12,7 @@
     ],
     "homepage": "https://github.com/teamfurther/semaphore",
     "license": "MIT",
+    "version": "1.0",
     "authors": [
         {
             "name": "Peter Illés",

@@ -3,10 +3,18 @@ module.exports = [
     "instance": "gofurther.digital",
     "name": "gofurther.digital",
     "url": "https://gofurther.digital",
-    "alerts": [],
     "checks": [
       {
         "id": "cpu_usage",
+        "alerts": [
+          {
+            "filter": "process=\"total\"",
+            "max": .9,
+            "period": 3 * 60, // 3 minutes
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_cpu_usage",
         "panel": {
           "class": "col-span-3",
           "order": 2,
@@ -14,11 +22,19 @@ module.exports = [
           "title": "CPU Usage",
           "zone": "main"
         },
-        "metric": "semaphore_cpu_usage",
         "widget": "trend"
       },
       {
         "id": "disk_io",
+        "alerts": [
+          {
+            "filter": "process=\"total\"",
+            "max": .9,
+            "period": 3 * 60, // 3 minutes
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_disk_io",
         "panel": {
           "class": "col-span-3",
           "order": 6,
@@ -26,11 +42,25 @@ module.exports = [
           "title": "Disk IO",
           "zone": "main"
         },
-        "metric": "semaphore_disk_io",
         "widget": "trend"
       },
       {
         "id": "disk_usage",
+        "alerts": [
+          {
+            "filter": "mounted=\"/\"",
+            "max": .8,
+            "period": 0, // current
+            "type": "threshold",
+          },
+          {
+            "filter": "mounted=\"/var/remote_backups\"",
+            "max": .9,
+            "period": 0, // current
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_disk_usage",
         "panel": {
           "class": "col-span-3",
           "order": 1,
@@ -38,22 +68,29 @@ module.exports = [
           "title": "Disk Usage",
           "zone": "main"
         },
-        "metric": "semaphore_disk_usage",
         "widget": "gauge"
       },
       {
         "id": "end_of_life",
+        "metric": "semaphore_end_of_life",
         "panel": {
           "class": "mb-4",
           "order": 0,
           "title": "End of Life",
           "zone": "sidebar"
         },
-        "metric": "semaphore_end_of_life",
         "widget": "eol"
       },
       {
         "id": "global_uptime",
+        "alerts": [
+          {
+            "min": .99,
+            "period": 24 * 60 * 60, // 1 day
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_global_uptime",
         "panel": {
           "class": "col-span-3",
           "order": 0,
@@ -61,32 +98,40 @@ module.exports = [
           "title": "Global Uptime",
           "zone": "main"
         },
-        "metric": "semaphore_global_uptime",
         "widget": "uptime"
       },
       {
         "id": "last_db_backup",
+        "metric": "semaphore_last_db_backup",
         "panel": {
           "class": "mb-4",
           "order": 1,
           "title": "Last Backup (DB)",
           "zone": "sidebar"
         },
-        "metric": "semaphore_last_db_backup",
         "widget": "value"
       },
       {
         "id": "last_file_backup",
+        "metric": "semaphore_last_file_backup",
         "panel": {
           "order": 2,
           "title": "Last Backup (Files)",
           "zone": "sidebar"
         },
-        "metric": "semaphore_last_file_backup",
         "widget": "value"
       },
       {
         "id": "memory_usage",
+        "alerts": [
+          {
+            "filter": "process=\"total\"",
+            "max": .9,
+            "period": 3 * 60, // 3 minutes
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_memory_usage",
         "panel": {
           "class": "col-span-3",
           "order": 3,
@@ -94,11 +139,18 @@ module.exports = [
           "title": "Memory Usage",
           "zone": "main"
         },
-        "metric": "semaphore_memory_usage",
         "widget": "trend"
       },
       {
         "id": "mysql_status",
+        "alerts": [
+          {
+            "min": 1,
+            "period": 0, // current
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_mysql_status",
         "panel": {
           "class": "col-span-2",
           "order": 2,
@@ -106,11 +158,18 @@ module.exports = [
           "title": "MySQL Status",
           "zone": "main"
         },
-        "metric": "semaphore_mysql_status",
         "widget": "uptime"
       },
       {
         "id": "nginx_status",
+        "alerts": [
+          {
+            "min": 1,
+            "period": 0, // current
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_nginx_status",
         "panel": {
           "class": "col-span-2",
           "order": 1,
@@ -118,11 +177,11 @@ module.exports = [
           "title": "nginx Status",
           "zone": "main"
         },
-        "metric": "semaphore_nginx_status",
         "widget": "uptime"
       },
       {
         "id": "response_time",
+        "metric": "semaphore_response_time",
         "panel": {
           "class": "col-span-3",
           "order": 5,
@@ -130,11 +189,18 @@ module.exports = [
           "title": "Server Response Time",
           "zone": "main"
         },
-        "metric": "semaphore_response_time",
         "widget": "trend"
       },
       {
         "id": "ssl_status",
+        "alerts": [
+          {
+            "min": .99,
+            "period": 3 * 60, // 3 minutes
+            "type": "threshold",
+          }
+        ],
+        "metric": "semaphore_ssl_status",
         "panel": {
           "class": "col-span-2",
           "order": 0,
@@ -142,7 +208,6 @@ module.exports = [
           "title": "SSL Status",
           "zone": "main"
         },
-        "metric": "semaphore_ssl_status",
         "widget": "uptime"
       }
     ]

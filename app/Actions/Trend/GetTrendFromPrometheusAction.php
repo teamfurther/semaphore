@@ -20,10 +20,14 @@ class GetTrendFromPrometheusAction implements ActionInterface
 
     /**
      * @param string $data
+     *
      * @return TrendDTO[]
      */
-    public function execute($data = null): array
+    public function execute(...$args): array
     {
+        /** @var string $data */
+        $data = $args[0];
+
         return $this->trendTransformer->transform($this->getDataFromPrometheusAction->execute());
     }
 }
