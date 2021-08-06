@@ -4,6 +4,7 @@
 
 @import 'elements/panel.scss';
 @import 'elements/table.scss';
+@import 'base/helper.scss';
 
 .badge {
     @apply align-middle h-2 inline-block mr-1 rounded-full w-2;
@@ -21,3 +22,4 @@
 .highlight-tangerine {
     @apply  bg-opacity-5 bg-tangerine border-opacity-20 border-tangerine;
 }
+
