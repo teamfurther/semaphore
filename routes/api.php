@@ -15,5 +15,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('data/{type}', [DataController::class, 'index'])->name('data');
-Route::get('notification', [NotificationController::class, 'notify'])->name('notification');

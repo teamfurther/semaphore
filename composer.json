@@ -1,38 +1,7 @@
 {
     "name": "teamfurther/semaphore",
     "description": "Semaphore is an extensible dashboard for viewing Prometheus time series.",
-    "keywords": [
-        "further",
-        "furtherdigitalsolutions",
-        "monitoring",
-        "laravel",
-        "prometheus",
-        "semaphore",
-        "server monitoring"
-    ],
-    "homepage": "https://github.com/teamfurther/semaphore",
     "license": "MIT",
-    "version": "1.0",
-    "authors": [
-        {
-            "name": "Peter Illés",
-            "email": "peter.illes@gofurther.digital",
-            "homepage": "https://gofurther.digital",
-            "role": "Developer"
-        },
-        {
-            "name": "Csongor Ur",
-            "email": "csongor.ur@gofurther.digital",
-            "homepage": "https://gofurther.digital",
-            "role": "Developer"
-        },
-        {
-            "name": "Norbert Zsombori",
-            "email": "norbert.zsombori@gofurther.digital",
-            "homepage": "https://gofurther.digital",
-            "role": "Developer"
-        }
-    ],
     "require": {
         "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
@@ -40,7 +9,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/slack-notification-channel": "^2.3",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "semaphore/semaphore": "dev-dev"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -62,6 +32,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/semaphore"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

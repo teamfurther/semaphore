@@ -18,9 +18,9 @@
         "scripthost"
     ],
     "include": [
-        "resources/ts/**/*.ts",
-        "resources/ts/**/*.tsx",
-        "resources/ts/**/*.vue"
+      "packages/semaphore/resources/ts/**/*.ts",
+      "packages/semaphore/resources/ts/**/*.tsx",
+      "packages/semaphore/resources/ts/**/*.vue"
     ],
     "exclude": [
         "node_modules"
