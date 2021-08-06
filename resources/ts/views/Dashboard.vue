@@ -1,7 +1,6 @@
 <template>
     <div class="view view--dashboard">
-
-      <interval-changer class="mb-3"></interval-changer>
+        <interval-changer class="mb-3"></interval-changer>
 
         <div class="flex panel">
             <table>
