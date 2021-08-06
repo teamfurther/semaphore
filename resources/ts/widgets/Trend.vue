@@ -9,32 +9,23 @@
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
     import Chart, { ChartItem } from 'chart.js/auto';
+    import TrendRepository from "../repositories/TrendRepository";
+    import TrendModel from '../models/trend/Trend';
+    import trendConfig from "../config/trendConfig";
 
     @Component
     export default class Trend extends Vue {
+        private trends: TrendModel[] = [];
+        private trendRepository: TrendRepository = TrendRepository.getInstance();
+
         mounted() {
+            this.getTrends();
+
             // initialize chart with random data
             let chart = new Chart(<ChartItem> document.querySelector('#' + this.id), {
                 data: {
-                    datasets: [{
-                        borderColor: '#ffb04e',
-                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
-                        label: 'prometheus',
-                        pointHoverRadius: 0,
-                        pointRadius: 0,
-                        showLine: false
-                    }, {
-                        borderColor: '#f7086e',
-                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
-                        label: 'top',
-                        pointHoverRadius: 0,
-                        pointRadius: 0,
-                        showLine: false
-                    }, {
-                        data: [...Array(30)].map(val => Math.random() * 100 | 0),
-                        label: 'TOTAL'
-                    }],
-                    labels: [...Array(30)].map((val, key) => key + 1)
+                    datasets: this.dataSet,
+                    labels: this.labels
                 },
                 options: {
                     elements: {
@@ -73,7 +64,43 @@
             });
         }
 
+        get dataSet() {
+            return this.trends.map((trend, index) => {
+                const colorIndex = index % 2 == 0 ? 0 : 1;
+
+                return {
+                    borderColor: trendConfig.colors[colorIndex],
+                    data: trend.values.map(value => {
+                        return {
+                            val: value.value,
+                        };
+                    }),
+                    label: trend.processName,
+                    pointHoverRadius: 0,
+                    pointRadius: 0,
+                    showLine: false
+                };
+            });
+        }
+
+        get labels() {
+            return this.trends.map((trend) => {
+                return {
+                    val: trend.processName
+                };
+            });
+        }
+
+        async getTrends() {
+            this.trends = await this.trendRepository.getTrend(this.metric, this.start, this.end);
+        }
+
         // Props
+        @Prop({
+            required: true,
+            type: Number,
+        }) end!: number;
+
         @Prop({
             required: true,
             type: String,
@@ -88,5 +115,10 @@
             required: true,
             type: String,
         }) title!: string;
+
+        @Prop({
+            required: true,
+            type: Number,
+        }) start!: number;
     };
 </script>

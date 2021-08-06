@@ -22,6 +22,6 @@ class SendNotification extends Notification
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-            ->content('Üdv srácok!');
+            ->content('Üdv!');
     }
 }

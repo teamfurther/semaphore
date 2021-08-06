@@ -12,7 +12,7 @@
     "devDependencies": {
         "@types/vue2-datepicker": "^3.3.1",
         "autoprefixer": "^10.3.1",
-        "axios": "^0.21",
+        "axios": "^0.21.1",
         "laravel-mix": "^6.0.25",
         "lodash": "^4.17.19",
         "node-sass": "^6.0.1",
