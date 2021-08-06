@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@types/vue2-datepicker": "^3.3.1",
         "autoprefixer": "^10.3.1",
         "axios": "^0.21",
         "laravel-mix": "^6.0.25",

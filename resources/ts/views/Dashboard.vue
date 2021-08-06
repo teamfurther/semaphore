@@ -149,7 +149,9 @@
     import IntervalChanger from '../components/IntervalChanger.vue';
 
     @Component({
-        IntervalChanger
+        components: {
+            IntervalChanger
+        }
     })
     export default class Dashboard extends AppMixins {
         mounted() {
