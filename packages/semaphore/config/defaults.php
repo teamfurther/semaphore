@@ -10,6 +10,7 @@ return [
         'step' => 50,
     ],
     'routes' => [
+        'domain' => env('APP_URL'),
         'middleware' => [
             'api' => 'api',
             'front' => 'web',

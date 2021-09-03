@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Actions\Prometheus\GetDataFromPrometheusAction;
+use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
 use Tests\Mocks\GetDataFromPrometheusActionTrendMock;
-use Tests\TestCase;
+use Semaphore\Tests\TestCase;
 
 class TrendTest extends TestCase
 {

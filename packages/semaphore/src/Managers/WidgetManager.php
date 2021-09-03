@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Semaphore\Managers;
 
 use Semaphore\Widgets\Widget;

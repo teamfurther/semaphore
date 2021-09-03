@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Semaphore\Http\Controllers\Api;
-
 
 use Semaphore\Actions\Notification\SendNotificationAction;
 

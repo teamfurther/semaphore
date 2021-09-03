@@ -25,7 +25,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Semaphore\\": "src"
+      "Semaphore\\": "src",
+      "Semaphore\\Tests\\": "tests"
     }
   },
   "extra": {
@@ -36,5 +37,9 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "orchestra/testbench": "^6.20"
+  }
 }

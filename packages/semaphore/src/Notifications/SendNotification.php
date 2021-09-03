@@ -1,8 +1,11 @@
 <?php
-namespace App\Notifications;
+
+namespace Semaphore\Notifications;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
+
 class SendNotification extends Notification
 {
     use Queueable;

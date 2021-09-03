@@ -1,13 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Semaphore\Tests\Feature;
 
-use Tests\TestCase;
+use Semaphore\Tests\TestCase;
 
 class DataApiTest extends TestCase
 {
     public function testWithoutMetricParam()
     {
+        dd(route('data', ['type' => 'trend']));
         $response = $this->json('GET', route('data', ['type' => 'trend']) . '?start=' . time() . '&end=' . time());
 
         $response->assertStatus(422);
