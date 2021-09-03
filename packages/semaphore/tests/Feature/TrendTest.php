@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
-use Tests\Mocks\GetDataFromPrometheusActionTrendMock;
+use Semaphore\Tests\Mocks\GetDataFromPrometheusActionTrendMock;
 use Semaphore\Tests\TestCase;
 
 class TrendTest extends TestCase

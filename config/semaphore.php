@@ -8,6 +8,6 @@ return [
             'api' => 'api',
             'front' => 'front',
         ],
-        'prefix' => 'semaphore-asd',
+        'prefix' => 'semaphore',
     ],
 ];
