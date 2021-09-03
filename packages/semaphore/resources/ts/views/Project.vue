@@ -84,13 +84,13 @@
         }
 
         getConfig() {
-            const configFile = require('@root/semaphore.config.js');
+            // const configFile = require('@root/semaphore.config.js');
 
-            this.config = configFile.find((val: any) => {
-                if (val.instance === this.instance) {
-                    return val;
-                }
-            });
+            // this.config = configFile.find((val: any) => {
+            //     if (val.instance === this.instance) {
+            //         return val;
+            //     }
+            // });
         }
 
         getNumberOfRows() {
