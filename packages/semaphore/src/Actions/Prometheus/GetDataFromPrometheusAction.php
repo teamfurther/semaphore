@@ -26,7 +26,7 @@ class GetDataFromPrometheusAction implements ActionInterface
         $metric = $data->get('metric');
         $start = $data->get('start');
         $end = $data->get('end');
-        $url = config('prometheus.api_end_point') . '?query=' . $metric . '&start=' . $start . '&end=' . $end . '&step=' . config('prometheus.step');
+        $url = config('semaphore.prometheus.api_end_point') . '?query=' . $metric . '&start=' . $start . '&end=' . $end . '&step=' . config('semaphore.prometheus.step');
 
         return json_decode($this->client->get($url)
             ->getBody()
