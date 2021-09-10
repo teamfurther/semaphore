@@ -10,7 +10,7 @@
                      v-bind:class="{ 'mb-12' : row < rows.length - 1 }"
                      v-for="(val, row) in rows"
                 >
-                    <component v-bind:class="check.panel.class"
+                    <component v-bind:class="check.panel.className"
                                v-bind:id="check.id"
                                v-bind:is="check.widget"
                                v-bind:key="check.id"
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <component v-bind:class="check.panel.class"
+                <component v-bind:class="check.panel.className"
                            v-bind:id="check.id"
                            v-bind:is="check.widget"
                            v-bind:key="check.id"
@@ -40,13 +40,14 @@
 
 <script lang="ts">
     import { Component } from 'vue-property-decorator';
-    import { ConfigType } from "../types/ConfigType";
     import AppMixins from '../mixins';
     import Eol from "../widgets/Eol.vue";
     import Gauge from '../widgets/Gauge.vue';
     import Trend from '../widgets/Trend.vue';
     import Uptime from '../widgets/Uptime.vue';
     import Value from '../widgets/Value.vue';
+    import ProjectModel from '../models/project/Project';
+    import ProjectRepository from "../repositories/ProjectRepository";
 
     @Component({
         components: {
@@ -58,19 +59,20 @@
         },
     })
     export default class Project extends AppMixins {
-        private config: Partial<ConfigType> = {};
+        private config: ProjectModel | null = null;
         private instance =  this.$route.params.instance;
         private rows = [null];
+        private projectRepository: ProjectRepository = ProjectRepository.getInstance();
 
-        mounted() {
-            this.getConfig();
+        async mounted() {
+            await this.getConfig();
 
             this.rows = [...Array(this.getNumberOfRows())].fill(null);
         }
 
         // Methods
         getChecksByZone(zone: string, row = null) {
-            if (!this.config.checks) {
+            if (!this.config || !this.config.checks) {
                 return [];
             }
 
@@ -79,24 +81,18 @@
                     return val;
                 }
             });
-
+            
             return checks.sort((a: any, b: any) => a.panel.order - b.panel.order);
         }
 
-        getConfig() {
-            // const configFile = require('@root/semaphore.config.js');
-
-            // this.config = configFile.find((val: any) => {
-            //     if (val.instance === this.instance) {
-            //         return val;
-            //     }
-            // });
+        async getConfig() {
+            this.config = await this.projectRepository.getProject(this.instance);
         }
 
         getNumberOfRows() {
             let maxRows = 0;
 
-            if (!this.config.checks) {
+            if (!this.config || !this.config.checks) {
                 return maxRows;
             }
 

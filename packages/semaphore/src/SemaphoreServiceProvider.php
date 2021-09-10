@@ -19,7 +19,7 @@ class SemaphoreServiceProvider extends ServiceProvider
         // publish assets
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/semaphore'),
-        ], 'public');
+        ], 'semaphore-public');
 
         // publish config
         $this->publishes([
