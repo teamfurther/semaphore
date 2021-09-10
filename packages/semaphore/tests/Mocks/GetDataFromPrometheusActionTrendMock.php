@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Mocks;
+namespace Semaphore\Tests\Mocks;
 
-use App\Actions\Prometheus\GetDataFromPrometheusAction;
+use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
 
 class GetDataFromPrometheusActionTrendMock extends GetDataFromPrometheusAction
 {
-    public function execute($data = null): array
+    public function execute(...$args): array
     {
         return [
             'status' => 'success',
