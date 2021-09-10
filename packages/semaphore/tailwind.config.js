@@ -1,10 +1,13 @@
 module.exports = {
-  mode: 'jit',
-  purge: [
-    './resources/views/**/*.blade.php',
-    './resources/ts/**/*.{js,jsx,ts,tsx,vue}',
-    './semaphore.config.js',
-  ],
+  purge: {
+    content: [
+      './resources/views/**/*.blade.php',
+      './resources/ts/**/*.{js,jsx,ts,tsx,vue}',
+    ],
+    options: {
+      safelist: [/^col-span-.*/, /^mb-.*/]
+    }
+  },
   theme: {
     extend: {
       colors: {

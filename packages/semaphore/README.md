@@ -8,13 +8,54 @@ Semaphore also allows you to configure notifications, which can be set when cert
 
 ## Installation
 
-You can install the package via composer:
+1. First, install the package via composer:
 
 ```composer require semaphore/semaphore```
 
+2. Publish assets:
+
+```php artisan vendor:publish --tags=semaphore-public```
+
+3. If you wish to override Semaphore default, publish the configuration file: 
+
+```php artisan vendor:publish --tags=semaphore-config```
+
+4. Make sure ```APP_URL``` in ```.env``` is correctly set.
+
 ### Setting up Prometheus and Pushgateway
 
-## Configuration
+## Project configuration
+
+### Checks
+
+```
+"checks" => [
+        ...
+        [
+            "id" => "cpu_usage",
+            "alerts" => [
+                [
+                    "filter" => "process=\"total\"",
+                    "max" => .9,
+                    "period" => 3 * 60, // 3 minutes
+                    "type" => "threshold",
+                ],
+            ],
+            "metric" => "semaphore_cpu_usage",
+            "panel" => [
+                "className" => "col-span-3",
+                "order" => 2,
+                "row" => 0,
+                "title" => "CPU Usage",
+                "zone" => "main",
+            ],
+            "widget" => "trend",
+        ],
+        ...
+],
+```
+
+```panel.className``` - Accepts the following TailwindCSS class groups: ```col-span-*```, ```mb-*``` 
 
 ### Main dashboard
 

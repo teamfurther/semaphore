@@ -81,7 +81,7 @@
                     return val;
                 }
             });
-            
+
             return checks.sort((a: any, b: any) => a.panel.order - b.panel.order);
         }
 

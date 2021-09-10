@@ -1966,6 +1966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/ts/store.ts");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var __extends = undefined && undefined.__extends || function () {
@@ -2008,6 +2009,7 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
 
 
 
+
 var App =
 /** @class */
 function (_super) {
@@ -2017,6 +2019,13 @@ function (_super) {
     return _super !== null && _super.apply(this, arguments) || this;
   }
 
+  Object.defineProperty(App.prototype, "appUrl", {
+    get: function get() {
+      return _store__WEBPACK_IMPORTED_MODULE_1__.default.state.appUrl;
+    },
+    enumerable: false,
+    configurable: true
+  });
   App = __decorate([vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__.Component], App);
   return App;
 }(vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__.Vue);
@@ -2427,7 +2436,6 @@ function (_super) {
         return val;
       }
     });
-    console.log(checks);
     return checks.sort(function (a, b) {
       return a.panel.order - b.panel.order;
     });
@@ -19667,7 +19675,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "app" }, [
-    _vm._m(0),
+    _c(
+      "div",
+      {
+        staticClass:
+          "container bg-cobalt flex items-center justify-between px-4 py-2 text-white"
+      },
+      [
+        _c("a", { staticClass: "h-10", attrs: { href: _vm.appUrl } }, [
+          _c("img", {
+            staticClass: "h-10",
+            attrs: {
+              src: "/vendor/semaphore/images/logo-knockout.svg",
+              alt: "Semaphore"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "text-sm hover:underline", attrs: { href: "#" } },
+          [_vm._v("Sign out")]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "container p-4" }, [_c("router-view")], 1),
     _vm._v(" "),
@@ -19684,37 +19715,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "container bg-cobalt flex items-center justify-between px-4 py-2 text-white"
-      },
-      [
-        _c("a", { staticClass: "h-10", attrs: { href: "/" } }, [
-          _c("img", {
-            staticClass: "h-10",
-            attrs: {
-              src: "/vendor/semaphore/images/logo-knockout.svg",
-              alt: "Semaphore"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "text-sm hover:underline", attrs: { href: "#" } },
-          [_vm._v("Sign out")]
-        )
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -20167,7 +20168,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "grid grid-flow-row grid-cols-6 gap-4",
+                      staticClass: "grid grid-cols-6 gap-4",
                       class: { "mb-12": row < _vm.rows.length - 1 }
                     },
                     _vm._l(_vm.getChecksByZone("main", row), function(check) {
