@@ -12,7 +12,8 @@ const path = require('path');
  |
  */
 
-mix.ts('resources/ts/app.ts', 'public/js').vue()
+mix.setPublicPath('public')
+    .ts('resources/ts/app.ts', 'public/js').vue()
     .postCss('resources/scss/app.css', 'public/css', [
         require('tailwindcss'),
     ])

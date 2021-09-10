@@ -8,7 +8,6 @@ class DataApiTest extends TestCase
 {
     public function testWithoutMetricParam()
     {
-        dd(route('data', ['type' => 'trend']));
         $response = $this->json('GET', route('data', ['type' => 'trend']) . '?start=' . time() . '&end=' . time());
 
         $response->assertStatus(422);

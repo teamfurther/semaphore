@@ -16,6 +16,11 @@ class SemaphoreServiceProvider extends ServiceProvider
         // load views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'semaphore');
 
+        // publish assets
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/semaphore'),
+        ], 'public');
+
         // publish config
         $this->publishes([
             __DIR__ . '/../config/semaphore.php' => config_path('semaphore.php'),

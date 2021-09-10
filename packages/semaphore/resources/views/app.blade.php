@@ -6,11 +6,11 @@
 
     <title>Semaphore</title>
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/semaphore/css/app.css') }}" />
 </head>
 <body class="bg-gray-50">
     <div id="app"></div>
 
-    <script src="{{ mix('js/app.js') }}?v2"></script>
+    <script src="{{ asset('vendor/semaphore/js/app.js') }}?v2"></script>
 </body>
 </html>
