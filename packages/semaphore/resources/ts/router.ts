@@ -1,8 +1,11 @@
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { __ } from './helpers';
 
 import Dashboard from './views/Dashboard.vue';
 import Project from './views/Project.vue';
+
+Vue.use(VueRouter);
 
 const routes = [
     {

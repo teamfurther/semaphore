@@ -790,6 +790,9 @@ video {
 .cursor-pointer {
 	cursor: pointer;
 }
+.grid-flow-row {
+	grid-auto-flow: row;
+}
 .grid-cols-3 {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 }

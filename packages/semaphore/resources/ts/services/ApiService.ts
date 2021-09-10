@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import apiConfig from "../config/apiConfig";
+import store from "../store";
 
 export default class ApiService {
     private static instance: ApiService | null = null;
@@ -15,10 +15,9 @@ export default class ApiService {
         return this.instance;
     }
 
-    public get(slug: string): Promise<AxiosResponse> {
-        console.log(apiConfig.apiUrl);
-        return new Promise<AxiosResponse>((resolve, reject) => {
-            axios.get(apiConfig.apiUrl + slug)
+    public get(slug: string): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            axios.get(store.state.appUrl + '/api/' + slug)
                 .then(response => resolve(response.data))
                 .catch(error => {
                     console.error(error);

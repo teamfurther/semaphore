@@ -24,7 +24,7 @@ export default class TrendRepository {
                 .then(response => {
                     const result: Trend[] = [];
 
-                    response.data.forEach((trend: any) => {
+                    response.forEach((trend: any) => {
                         const { pid, processName, values } = trend;
                         const trendValues: Value[] = values;
 
