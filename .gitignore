@@ -7,6 +7,7 @@
 /public/js
 /public/media
 /public/storage
+/public/vendor
 /public/video
 /storage/*.key
 /vendor
