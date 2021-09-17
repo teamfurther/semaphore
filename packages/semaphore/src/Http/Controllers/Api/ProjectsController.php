@@ -2,17 +2,27 @@
 
 namespace Semaphore\Http\Controllers\Api;
 
+use Semaphore\Actions\Projects\GetFullProjectsConfigAction;
+use Semaphore\Actions\Projects\GetProjectConfigAction;
+
 class ProjectsController
 {
-//    private WidgetManager $widget;
+    private GetFullProjectsConfigAction $getFullProjectsConfigAction;
+    private GetProjectConfigAction $getProjectConfigAction;
 
     public function __construct()
     {
-//        $this->widget = resolve(WidgetManager::class);
+        $this->getFullProjectsConfigAction = resolve(GetFullProjectsConfigAction::class);
+        $this->getProjectConfigAction = resolve(GetProjectConfigAction::class);
+    }
+
+    public function index()
+    {
+        return $this->getFullProjectsConfigAction->execute();
     }
 
     public function show(string $project)
     {
-        return require(base_path(config('semaphore.project_config_dir') . '/' . $project . '.php'));
+        return $this->getProjectConfigAction->execute($project);
     }
 }

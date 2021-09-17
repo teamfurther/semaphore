@@ -2,6 +2,7 @@
 
 namespace Semaphore;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Semaphore\Commands\AlertsCommand;
 
@@ -37,6 +38,12 @@ class SemaphoreServiceProvider extends ServiceProvider
                 AlertsCommand::class,
             ]);
         }
+
+        //schedule alerts process command
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('semaphore:alerts process')->everyMinute();
+        });
     }
 
     public function register()
@@ -45,12 +52,5 @@ class SemaphoreServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/defaults.php', 'semaphore'
         );
-
-        // merge project configurations
-        foreach (glob(config('semaphore.project_config_dir') . '/*.*') as $project) {
-            $this->mergeConfigFrom(
-                $project, 'semaphore_projects'
-            );
-        }
     }
 }

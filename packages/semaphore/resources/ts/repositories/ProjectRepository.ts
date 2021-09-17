@@ -27,14 +27,14 @@ export default class ProjectRepository {
                     const checks: CheckType[] = [];
 
                     response.checks.forEach((check: any) => {
-                        const {id, alerts, metric, panel, widget} = check;
+                        const { id, alerts, metric, panel, widget } = check;
                         const alertsObj: AlertType[] = [];
 
                         if (alerts) {
                             alerts.forEach((alert: any) => {
-                                const {filter, max, min, period} = alert;
+                                const { channel, filter, max, min, period } = alert;
 
-                                alertsObj.push({ filter, max, min, period });
+                                alertsObj.push({ channel, filter, max, min, period });
                             });
                         }
 

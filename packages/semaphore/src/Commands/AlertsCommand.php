@@ -5,13 +5,13 @@ namespace Semaphore\Commands;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Console\Command;
 use Semaphore\Actions\Alerts\CheckIfAlertsAreOnAction;
-use Semaphore\Actions\Alerts\GetAlertsAction;
+use Semaphore\Actions\Alerts\ProcessAlertsAction;
 
 class AlertsCommand extends Command
 {
     private CacheManager $cache;
     private CheckIfAlertsAreOnAction $checkIfAlertsAreOnAction;
-    private GetAlertsAction $getAlertsAction;
+    private ProcessAlertsAction $processAlertsAction;
 
     /**
      * @var string
@@ -23,17 +23,13 @@ class AlertsCommand extends Command
      */
     protected $signature = 'semaphore:alerts {action=help}';
 
-    public function __construct(
-        CacheManager $cache,
-        CheckIfAlertsAreOnAction $checkIfAlertsAreOnAction,
-        GetAlertsAction $getAlertsAction
-    )
+    public function __construct()
     {
         parent::__construct();
 
-        $this->cache = $cache;
-        $this->checkIfAlertsAreOnAction = $checkIfAlertsAreOnAction;
-        $this->getAlertsAction = $getAlertsAction;
+        $this->cache = resolve(CacheManager::class);
+        $this->checkIfAlertsAreOnAction = resolve(CheckIfAlertsAreOnAction::class);
+        $this->processAlertsAction = resolve(ProcessAlertsAction::class);
     }
 
     /**
@@ -66,7 +62,7 @@ class AlertsCommand extends Command
             }
             case 'process': {
                 if ($this->checkIfAlertsAreOnAction->execute()) {
-                    $alerts = $this->getAlertsAction->execute();
+                    $this->processAlertsAction->execute();
                 }
 
                 break;

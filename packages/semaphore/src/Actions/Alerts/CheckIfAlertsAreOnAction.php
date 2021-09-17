@@ -9,9 +9,9 @@ class CheckIfAlertsAreOnAction implements ActionInterface
 {
     private CacheManager $cache;
 
-    public function __construct(CacheManager $cache)
+    public function __construct()
     {
-        $this->cache = $cache;
+        $this->cache = resolve(CacheManager::class);
     }
 
     public function execute(...$args): bool
