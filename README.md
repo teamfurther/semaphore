@@ -18,7 +18,7 @@ You can install the package via composer:
 
 ### Main dashboard
 
-### Project dashboards
+### ProjectType dashboards
 
 ### Alerts
 

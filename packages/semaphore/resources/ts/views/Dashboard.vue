@@ -6,7 +6,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Project</th>
+                        <th>ProjectType</th>
                         <th>Health</th>
                         <th>Uptime</th>
                         <th>CPU</th>

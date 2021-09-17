@@ -24,7 +24,7 @@ Semaphore also allows you to configure notifications, which can be set when cert
 
 ### Setting up Prometheus and Pushgateway
 
-## Project configuration
+## ProjectType configuration
 
 ### Checks
 
@@ -59,7 +59,7 @@ Semaphore also allows you to configure notifications, which can be set when cert
 
 ### Main dashboard
 
-### Project dashboards
+### ProjectType dashboards
 
 ### Alerts
 

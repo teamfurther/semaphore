@@ -10,12 +10,12 @@
     import { Component, Prop, Vue } from 'vue-property-decorator';
     import Chart, { ChartItem } from 'chart.js/auto';
     import TrendRepository from "../repositories/TrendRepository";
-    import TrendModel from '../models/trend/Trend';
+    import { TrendType } from '../types/trend/TrendType';
     import trendConfig from "../config/trendConfig";
 
     @Component
     export default class Trend extends Vue {
-        private trends: TrendModel[] = [];
+        private trends: TrendType[] = [];
         private trendRepository: TrendRepository = TrendRepository.getInstance();
 
         mounted() {
