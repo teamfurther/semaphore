@@ -17,8 +17,8 @@
                                v-bind:metric="check.metric"
                                v-bind:title="check.panel.title"
                                v-for="check in getChecksByZone('main', row)"
-                               v-bind:start="1628162299"
-                               v-bind:end="1628251129"
+                               v-bind:start="1631871921"
+                               v-bind:end="1631886321"
                     ></component>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                            v-bind:metric="check.metric"
                            v-bind:title="check.panel.title"
                            v-for="check in getChecksByZone('sidebar')"
-                           v-bind:start="1628162299"
-                           v-bind:end="1628251129"
+                           v-bind:start="1631871921"
+                           v-bind:end="1631886321"
                 ></component>
             </div>
         </div>

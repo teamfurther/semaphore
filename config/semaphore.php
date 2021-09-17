@@ -1,9 +1,12 @@
 <?php
 
 return [
-    'project_config_dir' => 'projects/',
+    'project_config_dir' => 'projects',
+    'prometheus' => [
+        'api_end_point' => 'http://139.162.182.147:9090/api/v1',
+        'step' => 50,
+    ],
     'routes' => [
-        'domain' => env('APP_URL'),
         'middleware' => [
             'api' => 'api',
             'front' => 'front',

@@ -28,6 +28,6 @@ class GetTrendFromPrometheusAction implements ActionInterface
         /** @var string $data */
         $data = $args[0];
 
-        return $this->trendTransformer->transform($this->getDataFromPrometheusAction->execute($data));
+        return $this->trendTransformer->transform($this->getDataFromPrometheusAction->execute('query_range', $data));
     }
 }
