@@ -16,9 +16,12 @@ class GetDataFromPrometheusAction implements ActionInterface
     }
 
     /**
+     * @param string $endpoint
+     * @param mixed ...$args
+     * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function execute(...$args): array
+    public function execute($endpoint = 'query_range', ...$args): array
     {
         /** @var DataRequest $data */
         $data = $args[0];
@@ -26,7 +29,7 @@ class GetDataFromPrometheusAction implements ActionInterface
         $metric = $data->get('metric');
         $start = $data->get('start');
         $end = $data->get('end');
-        $url = config('semaphore.prometheus.api_end_point') . '?query=' . $metric . '&start=' . $start . '&end=' . $end . '&step=' . config('semaphore.prometheus.step');
+        $url = config('semaphore.prometheus.api_end_point') . '/' . $endpoint . '?query=' . $metric . '&start=' . $start . '&end=' . $end . '&step=' . config('semaphore.prometheus.step');
 
         return json_decode($this->client->get($url)
             ->getBody()
