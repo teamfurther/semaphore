@@ -46,7 +46,7 @@
     import Trend from '../widgets/Trend.vue';
     import Uptime from '../widgets/Uptime.vue';
     import Value from '../widgets/Value.vue';
-    import ProjectModel from '../models/project/Project';
+    import { ProjectType } from '../types/project/ProjectType';
     import ProjectRepository from "../repositories/ProjectRepository";
 
     @Component({
@@ -59,7 +59,7 @@
         },
     })
     export default class Project extends AppMixins {
-        private config: ProjectModel | null = null;
+        private config: ProjectType | null = null;
         private instance =  this.$route.params.instance;
         private rows = [null];
         private projectRepository: ProjectRepository = ProjectRepository.getInstance();
