@@ -24,7 +24,7 @@ Semaphore also allows you to configure notifications, which can be set when cert
 
 ### Setting up Prometheus and Pushgateway
 
-## ProjectType configuration
+## Project configuration
 
 ### Checks
 
@@ -59,14 +59,14 @@ Semaphore also allows you to configure notifications, which can be set when cert
 
 ### Main dashboard
 
-### ProjectType dashboards
+### Project dashboards
 
 ### Alerts
 
-## Credits
+## Slack
+https://api.slack.com/messaging/webhooks
 
-- [Szabolcs BENEDEK](https://github.com/benedek1239)
-- [István FARKAS](https://github.com/istvanfarkas96)
+## Credits
 - [Peter ILLÉS](https://github.com/ilpet)
 - [Csongor UR](https://github.com/csongorur)
 - [Norbert ZSOMBORI](https://github.com/zsnorbi)

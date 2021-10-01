@@ -35,6 +35,7 @@ class GetAlertsAction implements ActionInterface
                         'instance' => $project['instance'],
                         'id' => $check['id'],
                         'metric' => $check['metric'],
+                        'name' => $check['name'],
                         'channel' => $alert['channel'],
                         'filter' => $alert['filter'] ?? null,
                         'max' => $alert['max'] ?? 1,

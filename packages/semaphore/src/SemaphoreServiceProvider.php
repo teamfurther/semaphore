@@ -14,6 +14,9 @@ class SemaphoreServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/front.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
+        // load translations
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'semaphore');
+
         // load views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'semaphore');
 
@@ -24,8 +27,13 @@ class SemaphoreServiceProvider extends ServiceProvider
 
         // publish config
         $this->publishes([
-            __DIR__ . '/../config/semaphore.php' => config_path('semaphore.php'),
+            __DIR__ . '/../config/semaphore.php' => config_path('alerts.php'),
         ], 'semaphore-config');
+
+        // publish translation so they can be overridden
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/semaphore'),
+        ]);
 
         // publish views so they can be overridden
         $this->publishes([

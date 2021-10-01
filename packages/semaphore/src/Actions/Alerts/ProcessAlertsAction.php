@@ -3,7 +3,6 @@
 namespace Semaphore\Actions\Alerts;
 
 use Semaphore\Actions\ActionInterface;
-use Semaphore\Actions\Notification\SendAlertNotificationAction;
 
 class ProcessAlertsAction implements ActionInterface
 {
@@ -15,6 +14,7 @@ class ProcessAlertsAction implements ActionInterface
 
     public function __construct()
     {
+        $this->checkIfAlertShouldBeSent = resolve(CheckIfAlertShouldBeSentAction::class);
         $this->getAlertsAction = resolve(GetAlertsAction::class);
         $this->sendAlertNotificationAction = resolve(SendAlertNotificationAction::class);
     }

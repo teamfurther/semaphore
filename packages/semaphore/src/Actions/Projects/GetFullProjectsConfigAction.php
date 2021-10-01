@@ -15,7 +15,10 @@ class GetFullProjectsConfigAction implements ActionInterface
     {
         foreach (glob(config('semaphore.project_config_dir') . '/*.*') as $project) {
             $projectConfig = require($project);
-            $this->projects[$projectConfig['instance']] = $projectConfig;
+
+            if ($projectConfig && isset($projectConfig['instance'])) {
+                $this->projects[$projectConfig['instance']] = $projectConfig;
+            }
         }
 
         return $this->projects;

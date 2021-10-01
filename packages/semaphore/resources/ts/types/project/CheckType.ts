@@ -5,6 +5,7 @@ export type CheckType = {
     id: string;
     alerts: AlertType[];
     metric: string;
+    name: string;
     panel: PanelType;
     widget: string;
 }
