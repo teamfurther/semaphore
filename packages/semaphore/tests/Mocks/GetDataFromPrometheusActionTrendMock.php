@@ -6,7 +6,7 @@ use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
 
 class GetDataFromPrometheusActionTrendMock extends GetDataFromPrometheusAction
 {
-    public function execute(...$args): array
+    public function execute($endpoint = 'query_range', ...$args): array
     {
         return [
             'status' => 'success',
