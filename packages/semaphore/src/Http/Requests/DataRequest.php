@@ -14,9 +14,9 @@ class DataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'end' => ['required'],
+            'end' => [],
             'metric' => ['required'],
-            'start' => ['required'],
+            'start' => [],
         ];
     }
 }
