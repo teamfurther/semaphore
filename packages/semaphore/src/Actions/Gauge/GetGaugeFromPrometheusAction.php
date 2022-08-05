@@ -26,7 +26,7 @@ class GetGaugeFromPrometheusAction implements ActionInterface
         $request = $args[0];
 
         return $this->gaugeTransformer->transform(
-            $this->getDataFromPrometheusAction->execute('query', $request->get('metric'))
+            $this->getDataFromPrometheusAction->execute('query', $request)
         );
     }
 }
