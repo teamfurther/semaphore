@@ -4,4 +4,5 @@ export type EolType = {
     name: string,
     version: string,
     color: EolColor,
+    isLatest: boolean,
 }

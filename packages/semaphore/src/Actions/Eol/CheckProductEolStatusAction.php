@@ -25,22 +25,19 @@ class CheckProductEolStatusAction implements ActionInterface
     {
         /** @var string $product */
         $product = $args[0];
-        /** @var string $version */
         $version = $this->versionTransformer->transform($args[1]);
 
         $cycles = $this->getProductCyclesAction->execute($product);
         $cycle = $this->getMatchingProductCycleAction->execute($cycles, $version);
 
         if ($cycle) {
-            $eol = new EolDto(
+            return new EolDto(
                 $product,
                 $version,
                 $this->versionTransformer->transform($cycles[0]->latest),
-                $this->determineSupportTruthinessAction->execute($cycle->support),
-                $this->determineSupportTruthinessAction->execute($cycle->eol),
+                $this->determineSupportTruthinessAction->execute($cycle->support ?? ($cycle->eol ?? false)),
+                $this->determineSupportTruthinessAction->execute($cycle->eol ?? false),
             );
-
-            return $eol;
         }
 
         return null;

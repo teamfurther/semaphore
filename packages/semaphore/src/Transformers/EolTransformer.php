@@ -2,10 +2,18 @@
 
 namespace Semaphore\Transformers;
 
+use Semaphore\Actions\Eol\CheckProductEolStatusAction;
 use Semaphore\DataTransferObjects\EolDTO;
 
 class EolTransformer implements TransformerInterface
 {
+    private CheckProductEolStatusAction $checkProductEolStatusAction;
+
+    public function __construct()
+    {
+        $this->checkProductEolStatusAction = resolve(CheckProductEolStatusAction::class);
+    }
+
     /** @return EolDTO[] */
     public function transform($data): array
     {
@@ -14,7 +22,7 @@ class EolTransformer implements TransformerInterface
         return array_map(function ($item) {
             $metric = $item['metric'];
 
-            return new EolDTO($metric['series'], $metric['version'], 'red');
+            return $this->checkProductEolStatusAction->execute($metric['series'], $metric['version']);
         }, $result);
     }
 }

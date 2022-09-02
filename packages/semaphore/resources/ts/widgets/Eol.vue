@@ -10,7 +10,7 @@
                         <span><span v-bind:class="[getStatusClass(eol), 'badge']"></span>{{ eol.version }}</span>
                     </div>
                 </td>
-                <td><span class="badge bg-gray-400"></span>Not latest</td>
+                <td><span class="badge bg-gray-400"></span>{{ eol.isLatest ? 'Latest' : 'Not latest' }}</td>
             </tr>
             </tbody>
         </table>

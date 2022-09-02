@@ -1,5 +1,6 @@
 import ApiService from "../services/ApiService";
 import {EolType} from "../types/eol/EolType";
+import {EolColor} from "../enums/EolColor";
 
 export default class EolRepository {
     private apiService: ApiService = ApiService.getInstance();
@@ -21,14 +22,22 @@ export default class EolRepository {
             this.apiService.get(url)
                 .then(response => {
                     resolve(response.data.map((eol: any) => {
-                        const { name, version, color } = eol;
+                        if (eol) {
+                            const { product, version, latest, activeSupport, securitySupport } = eol;
+                            const color = activeSupport ? EolColor.GREEN : (securitySupport ? EolColor.YELLOW : EolColor.RED);
+                            const currentVersionString = `${version.major}.${version.minor}.${version.patch}`;
+                            const latestVersionString = `${latest.major}.${latest.minor}.${latest.patch}`;
 
-                        return {
-                            name,
-                            version,
-                            color
-                        } as EolType;
-                    }));
+                            return {
+                                name: product,
+                                version: currentVersionString,
+                                color: color,
+                                isLatest: currentVersionString === latestVersionString,
+                            } as EolType;
+                        }
+
+                        return null;
+                    }).filter((eol: any) => eol));
                 })
                 .catch(error => {
                     reject(error);
