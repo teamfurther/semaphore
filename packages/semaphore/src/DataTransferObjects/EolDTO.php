@@ -4,14 +4,24 @@ namespace Semaphore\DataTransferObjects;
 
 class EolDTO
 {
-    public string $name;
-    public string $version;
-    public string $color;
+    public string $product;
+    public VersionDTO $version;
+    public VersionDTO $latest;
+    public bool $activeSupport;
+    public bool $securitySupport;
 
-    public function __construct(string $name, string $version, string $color)
+    public function __construct(
+        string $product,
+        VersionDTO $version,
+        VersionDTO $latest,
+        bool $activeSupport,
+        bool $securitySupport,
+    )
     {
-        $this->name = $name;
+        $this->product = $product;
         $this->version = $version;
-        $this->color = $color;
+        $this->latest = $latest;
+        $this->activeSupport = $activeSupport;
+        $this->securitySupport = $securitySupport;
     }
 }
