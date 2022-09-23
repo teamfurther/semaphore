@@ -1,7 +1,7 @@
 import { ValueType } from "./ValueType";
 
 export type TrendType = {
-    pid: number;
-    processName: string;
-    values: ValueType[];
+    label: string,
+    labelExtension: string,
+    values: ValueType[],
 }

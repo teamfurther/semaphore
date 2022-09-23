@@ -17,6 +17,7 @@ class DataRequest extends FormRequest
             'end' => ['required'],
             'metric' => ['required'],
             'start' => ['required'],
+            'instance' => ['required'],
         ];
     }
 }

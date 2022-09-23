@@ -12,26 +12,28 @@
                 >
                     <component v-bind:class="check.panel.className"
                                v-bind:id="check.id"
+                               v-bind:instance="config.instance"
                                v-bind:is="check.widget"
                                v-bind:key="check.id"
                                v-bind:metric="check.metric"
                                v-bind:title="check.panel.title"
                                v-for="check in getChecksByZone('main', row)"
-                               v-bind:start="1631871921"
-                               v-bind:end="1631886321"
+                               v-bind:start="1663916607"
+                               v-bind:end="1663931014"
                     ></component>
                 </div>
             </div>
             <div class="col-span-1">
                 <component v-bind:class="check.panel.className"
                            v-bind:id="check.id"
+                           v-bind:instance="config.instance"
                            v-bind:is="check.widget"
                            v-bind:key="check.id"
                            v-bind:metric="check.metric"
                            v-bind:title="check.panel.title"
                            v-for="check in getChecksByZone('sidebar')"
-                           v-bind:start="1631871921"
-                           v-bind:end="1631886321"
+                           v-bind:start="1663916607"
+                           v-bind:end="1663931014"
                 ></component>
             </div>
         </div>

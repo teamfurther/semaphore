@@ -12,20 +12,82 @@
     import TrendRepository from "../repositories/TrendRepository";
     import { TrendType } from '../types/trend/TrendType';
     import trendConfig from "../config/trendConfig";
+    import {ListType} from "../types/trend/ListType";
 
     @Component
     export default class Trend extends Vue {
-        private trends: TrendType[] = [];
+        /*private totals: number[] = [];*/
+        private trends: ListType = {
+            totals: [],
+            values: [],
+        };
         private trendRepository: TrendRepository = TrendRepository.getInstance();
 
         mounted() {
             this.getTrends();
+        }
 
+        get dataSet() {
+             return this.trends.values.map((trend, index) => {
+                const colorIndex = index % 2 == 0 ? 0 : 1;
+
+                let values: number[] = [];
+
+                this.timestamps.forEach((timestamp) => {
+                    if (trend.values[timestamp] === undefined) {
+                        values.push(0);
+                        return;
+                    }
+
+                    values.push(trend.values[timestamp].value);
+                });
+
+                return {
+                    borderColor: trendConfig.colors[colorIndex],
+                    data: values,
+                    label: trend.label,
+                    pointHoverRadius: 0,
+                    pointRadius: 0,
+                    showLine: false
+                };
+            });
+        }
+
+        get labels() {
+            return this.trends.totals.map((trend) => {
+                return trend.datetime;
+            });
+        }
+
+        get timestamps() {
+            return this.trends.totals.map((trend) => {
+                return Math.trunc(trend.timestamp);
+            });
+        }
+
+        get totals() {
+            return this.trends.totals.map((trend) => {
+                return trend.total;
+            });
+        }
+
+        async getTrends() {
+            this.trends = await this.trendRepository.index(this.metric, this.instance, this.start, this.end);
+
+            this.$forceUpdate();
+
+            this.initChart();
+        }
+
+        initChart() {
             // initialize chart with random data
-            let chart = new Chart(<ChartItem> document.querySelector('#' + this.id), {
+            new Chart(<ChartItem> document.querySelector('#' + this.id), {
                 data: {
-                    datasets: this.dataSet,
-                    labels: this.labels
+                    datasets: [...this.dataSet, ...[{
+                        data: this.totals,
+                        label: 'TOTAL'
+                    }]],
+                    labels: this.labels,
                 },
                 options: {
                     elements: {
@@ -50,6 +112,17 @@
                                     return String(chart.parsed.y).padStart(3, ' ') + '% - ' + chart.dataset.label;
                                 }
                             },
+                            itemSort: function (a: any, b: any) {
+                                if (a.dataset.label === 'TOTAL') {
+                                    return -1;
+                                }
+
+                                if (b.dataset.label === 'TOTAL') {
+                                    return 1;
+                                }
+
+                                return b.raw - a.raw;
+                            },
                             position: 'nearest'
                         }
                     },
@@ -64,37 +137,6 @@
             });
         }
 
-        get dataSet() {
-            return this.trends.map((trend, index) => {
-                const colorIndex = index % 2 == 0 ? 0 : 1;
-
-                return {
-                    borderColor: trendConfig.colors[colorIndex],
-                    data: trend.values.map(value => {
-                        return {
-                            val: value.value,
-                        };
-                    }),
-                    label: trend.processName,
-                    pointHoverRadius: 0,
-                    pointRadius: 0,
-                    showLine: false
-                };
-            });
-        }
-
-        get labels() {
-            return this.trends.map((trend) => {
-                return {
-                    val: trend.processName
-                };
-            });
-        }
-
-        async getTrends() {
-            this.trends = await this.trendRepository.getTrend(this.metric, this.start, this.end);
-        }
-
         // Props
         @Prop({
             required: true,
@@ -105,6 +147,11 @@
             required: true,
             type: String,
         }) id!: string;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) instance!: string;
 
         @Prop({
             required: true,

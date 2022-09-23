@@ -4,15 +4,16 @@ namespace Semaphore\DataTransferObjects;
 
 class TrendDTO
 {
-    public int $pid;
-    public string $processName;
-    /** @var ValueTimeDTO[] $values */
+
+    public int $time;
+    public float $total;
+    /** @var TrendValueDTO[] $values */
     public array $values;
 
-    public function __construct(int $pid, string $processName, array $values)
+    public function __construct(int $time, float $total, array $values)
     {
-        $this->pid = $pid;
-        $this->processName = $processName;
+        $this->time = $time;
+        $this->total = $total;
         $this->values = $values;
     }
 }

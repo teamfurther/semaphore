@@ -10,21 +10,53 @@ class TrendTransformer implements TransformerInterface
     /** @return TrendDTO[] */
     public function transform($data): array
     {
-        $trends = [];
         $result = $data['data']['result'];
+        $trendsByTimestamp = [];
+        $trendsByLabel = [];
+        $timestamps = [];
 
         foreach ($result as $item) {
-            $values = array_map(function ($value) {
-                return new ValueTimeDTO($value[0], $value[1]);
-            }, $item['values']);
+            $trendsByLabelItem = [
+                'label_extension' => 'pid=' . $item['metric']['pid'],
+                'label' => $item['metric']['process'],
+            ];
 
-            $trends[] = new TrendDTO(
-                $item['metric']['pid'],
-                $item['metric']['process'],
-                $values
-            );
+            foreach ($item['values'] as $itemValue) {
+                $total = isset($trendsByTimestamp[$itemValue[0]]) ? $trendsByTimestamp[$itemValue[0]]['total'] : 0;
+                $values = isset($trendsByTimestamp[$itemValue[0]]) ? $trendsByTimestamp[$itemValue[0]]['values'] : [];
+
+                $values[] = [
+                    'label_extension' => 'pid=' . $item['metric']['pid'],
+                    'label' => $item['metric']['process'],
+                    'value' => $itemValue[1],
+                ];
+
+                $trendsByTimestamp[$itemValue[0]] = [
+                    'timestamp' => $itemValue[0],
+                    'datetime' => date('Y-m-d H:i:s', $itemValue[0]),
+                    'total' => $total + $itemValue[1],
+                    'values' => $values,
+                ];
+
+                $trendsByLabelItem['values'][$itemValue[0]] = [
+                    'datetime' => date('Y-m-d H:i:s', $itemValue[0]),
+                    'timestamp' => $itemValue[0],
+                    'value' => $itemValue[1],
+                ];
+            }
+
+            $trendsByLabel[] = $trendsByLabelItem;
+
+
         }
 
-        return $trends;
+        //dd($labels);
+
+        ksort($trendsByTimestamp);
+
+        return [
+            'values' => array_values($trendsByLabel),
+            'totals' => array_values($trendsByTimestamp),
+        ];
     }
 }
