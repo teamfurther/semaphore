@@ -2,19 +2,12 @@
     <div class="panel pb-12 relative">
         <div class="panel--title" v-html="title"></div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="relative">
+            <div class="relative" v-for="gauge in gauges">
                 <canvas class="chart-doughnut mb-2" height="30" v-bind:id="id"></canvas>
                 <span class="absolute flex items-center left-1/2 text-tangerine text-4xl top-2/3 transform -translate-x-1/2 -translate-y-1/2">
-                    82%
+                    {{ gauge.value }}%
                 </span>
-                <span class="text-xs text-gray-400">/</span>
-            </div>
-            <div class="relative">
-                <canvas class="chart-doughnut mb-2" height="50" v-bind:id="id"></canvas>
-                <span class="absolute flex items-center left-1/2 text-pearl text-4xl top-2/3 transform -translate-x-1/2 -translate-y-1/2">
-                    52%
-                </span>
-                <span class="text-xs text-gray-400">/var/remote_backups</span>
+                <span class="text-xs text-gray-400">{{ gauge.name }}</span>
             </div>
         </div>
         <div class="bottom-4 absolute text-xs text-gray-400">Current data</div>
@@ -24,17 +17,22 @@
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
     import Chart from 'chart.js/auto';
+    import {GaugeType} from "../types/gauge/GaugeType";
+    import GaugeRepository from "../repositories/GaugeRepository";
 
     @Component
     export default class Gauge extends Vue {
-        mounted() {
+        async mounted() {
+            await this.getGauges();
+            const vm = this;
+
             // initialize donut charts with data
             [].forEach.call(document.querySelectorAll('.chart-doughnut'), function(e, i) {
                 let chart = new Chart(e, {
                     data: {
                         datasets: [{
-                            backgroundColor: [i === 0 ? '#ffb04e' : '#6ecbbf', '#f3f4f6'],
-                            data: [i === 0 ? 82 : 52, i === 0 ? 18 : 48]
+                            backgroundColor: [vm.gauges[i].color, '#f3f4f6'],
+                            data: [vm.gauges[i].value, 100 - vm.gauges[i].value]
                         }]
                     },
                     options: {
@@ -68,5 +66,17 @@
             required: true,
             type: String,
         }) title!: string;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) instance!: string;
+
+        private gaugeRepository: GaugeRepository = GaugeRepository.getInstance();
+        private gauges: GaugeType[] = [];
+
+        async getGauges() {
+            this.gauges = await this.gaugeRepository.getGauge(this.metric, this.instance);
+        }
     };
 </script>
