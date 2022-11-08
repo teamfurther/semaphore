@@ -16,9 +16,9 @@ export default class EolRepository {
         return this.instance;
     }
 
-    public getEol(metric: string, start: number, end: number): Promise<EolType[]> {
+    public getEol(metric: string, start: number, end: number, instance: string): Promise<EolType[]> {
         return new Promise<EolType[]>((resolve, reject) => {
-            const url = `data/eol?metric=${metric}&start=${start}&end=${end}`;
+            const url = `data/eol?metric=${metric}&instance=${instance}&start=${start}&end=${end}`;
             this.apiService.get(url)
                 .then(response => {
                     resolve(response.data.map((eol: any) => {

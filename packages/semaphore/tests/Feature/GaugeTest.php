@@ -25,7 +25,7 @@ class GaugeTest extends TestCase
             ],
         ];
 
-        $url = route('data', ['type' => 'gauge']) . '?metric=semaphore_disk_usage';
+        $url = route('data', ['type' => 'gauge']) . '?metric=semaphore_disk_usage&instance=test-instance';
 
         $response = $this->json('GET', $url);
 

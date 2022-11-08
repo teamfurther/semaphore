@@ -17,9 +17,9 @@ export default class TrendRepository {
         return this.instance;
     }
 
-    public getTrend(metric: string, start: number, end: number): Promise<TrendType[]> {
+    public getTrend(metric: string, start: number, end: number, instance: string): Promise<TrendType[]> {
         return new Promise<TrendType[]>((resolve, reject) => {
-            const url = `data/trend?metric=${metric}&start=${start}&end=${end}`;
+            const url = `data/trend?metric=${metric}&instance=${instance}&start=${start}&end=${end}`;
             this.apiService.get(url)
                 .then(response => {
                     const result: TrendType[] = [];

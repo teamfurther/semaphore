@@ -42,6 +42,11 @@ export default class Eol extends Vue {
         type: String,
     }) title!: string;
 
+    @Prop({
+        required: true,
+        type: String,
+    }) instance!: string;
+
     // Data
     private eolRepository: EolRepository = EolRepository.getInstance();
     private eols: EolType[] = [];
@@ -50,7 +55,7 @@ export default class Eol extends Vue {
         const start: number = Date.now();
         const end: number = Date.now();
 
-        this.eols = await this.eolRepository.getEol(this.metric, start, end);
+        this.eols = await this.eolRepository.getEol(this.metric, start, end, this.instance);
     }
 
     getStatusClass(eol: EolType) {

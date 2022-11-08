@@ -20,7 +20,7 @@ class ValueTest extends TestCase
             ],
         ];
 
-        $url = route('data', ['type' => 'value']) . '?metric=semaphore_last_backup_db';
+        $url = route('data', ['type' => 'value']) . '?metric=semaphore_last_backup_db&instance=test-instance';
 
         $response = $this->json('GET', $url);
 

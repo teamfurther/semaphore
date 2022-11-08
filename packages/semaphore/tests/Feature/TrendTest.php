@@ -54,7 +54,7 @@ class TrendTest extends TestCase
             ],
         ];
 
-        $url = route('data', ['type' => 'trend']) . '?metric=semaphore_memory_usage&start=2021-01-01&end=2021-01-03';
+        $url = route('data', ['type' => 'trend']) . '?metric=semaphore_memory_usage&start=2021-01-01&end=2021-01-03&instance=test-instance';
 
         $response = $this->json('GET', $url);
 
