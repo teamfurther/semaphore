@@ -72,7 +72,7 @@ return [
 //        ],
 //        [
 //            'id' => 'end_of_life',
-//            'metric' => 'semaphore_end_of_life',
+//            'metric' => 'semaphore_eol',
 //            'panel' => [
 //                'className' => 'mb-4',
 //                'order' => 0,
