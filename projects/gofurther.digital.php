@@ -134,7 +134,8 @@ return [
         ],
         [
             'id' => 'last_file_backup',
-            'metric' => 'semaphore_last_file_backup',
+            'metric' => 'semaphore_last_backup_file',
+            'name' => 'Last file Backup',
             'panel' => [
                 'order' => 2,
                 'title' => 'Last Backup (Files)',

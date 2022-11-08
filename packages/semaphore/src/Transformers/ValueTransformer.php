@@ -4,6 +4,7 @@ namespace Semaphore\Transformers;
 
 use Semaphore\Actions\Projects\GetMetricProjectConfigAction;
 use Semaphore\DataTransferObjects\ValueDTO;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ValueTransformer implements TransformerInterface
 {
@@ -16,6 +17,10 @@ class ValueTransformer implements TransformerInterface
 
     public function transform($data): ValueDTO
     {
+        if (empty($data['data']['result'])) {
+            throw new NotFoundHttpException('Value not found');
+        }
+
         $result = $data['data']['result'][0];
 
         $config = $this->getMetricProjectConfigAction->execute($result['metric']['instance'], $result['metric']['__name__']);
