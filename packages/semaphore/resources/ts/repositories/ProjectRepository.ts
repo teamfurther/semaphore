@@ -27,7 +27,7 @@ export default class ProjectRepository {
                     const checks: CheckType[] = [];
 
                     response.checks.forEach((check: any) => {
-                        const { id, alerts, metric, name, panel, widget } = check;
+                        const { id, alerts, metric, name, panel, levels, widget } = check;
                         const alertsObj: AlertType[] = [];
 
                         if (alerts) {
@@ -45,7 +45,7 @@ export default class ProjectRepository {
                             zone: panel.zone
                         };
 
-                        checks.push({ id, alerts: alertsObj, metric, name, panel: panelObj, widget });
+                        checks.push({ id, alerts: alertsObj, metric, name, panel: panelObj, levels, widget });
                     });
 
                     const result: ProjectType = {instance: response.instance, url: response.url, checks };

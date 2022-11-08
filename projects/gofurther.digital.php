@@ -71,6 +71,10 @@ return [
                 'title' => 'Disk Usage',
                 'zone' => 'main',
             ],
+            'levels' => [
+                'warning' => 60,
+                'critical' => 80,
+            ],
             'widget' => [
                 'type' => 'gauge',
                 'label' => 'mounted',
@@ -86,7 +90,9 @@ return [
                 'title' => 'End of Life',
                 'zone' => 'sidebar',
             ],
-            'widget' => 'eol',
+            'widget' => [
+                'type' => 'eol',
+            ],
         ],
         [
             'id' => 'global_uptime',
