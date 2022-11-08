@@ -1,98 +1,17 @@
 <template>
     <div class="panel pb-12 relative">
         <div class="panel--title" v-html="title"></div>
-        <table>
+        <table v-if="eols">
             <tbody>
-                <tr>
-                    <td>Ubuntu</td>
-                    <td>
-                        <div class="highlight">
-                            <span><span class="badge bg-pearl"></span>18.04</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>nginx</td>
-                    <td>
-                        <div class="highlight highlight-raspberry">
-                            <span><span class="badge bg-raspberry"></span>1.14.0</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>PHP</td>
-                    <td>
-                        <div class="highlight highlight-tangerine">
-                            <span><span class="badge bg-tangerine"></span>7.3.28</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>Laravel</td>
-                    <td>
-                        <div class="highlight highlight-raspberry">
-                            <span><span class="badge bg-raspberry"></span>5.8.38</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>Composer</td>
-                    <td>
-                        <div class="highlight">
-                            <span><span class="badge bg-gray-400"></span>1.6.2</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>Node</td>
-                    <td>
-                        <div class="highlight highlight-raspberry">
-                            <span><span class="badge bg-raspberry"></span>9.11.2</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>Vue</td>
-                    <td>
-                        <div class="highlight">
-                            <span><span class="badge bg-pearl"></span>2.6.8</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>NPM</td>
-                    <td>
-                        <div class="highlight">
-                            <span><span class="badge bg-gray-400"></span>5.6.0</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>MariaDB</td>
-                    <td>
-                        <div class="highlight highlight-raspberry">
-                            <span><span class="badge bg-raspberry"></span>10.1.48</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-gray-400"></span>Not latest</td>
-                </tr>
-                <tr>
-                    <td>Redis</td>
-                    <td>
-                        <div class="highlight">
-                            <span><span class="badge bg-pearl"></span>6.2.4</span>
-                        </div>
-                    </td>
-                    <td><span class="badge bg-pearl"></span>Latest</td>
-                </tr>
+            <tr v-for="eol in eols">
+                <td>{{ eol.name }}</td>
+                <td>
+                    <div class="highlight">
+                        <span><span v-bind:class="[getStatusClass(eol), 'badge']"></span>{{ eol.version }}</span>
+                    </div>
+                </td>
+                <td><span class="badge bg-gray-400"></span>{{ eol.isLatest ? 'Latest' : 'Not latest' }}</td>
+            </tr>
             </tbody>
         </table>
         <div class="bottom-4 absolute text-xs text-gray-400">Current data</div>
@@ -100,24 +19,57 @@
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import EolRepository from "../repositories/EolRepository";
+import {EolType} from "../types/eol/EolType";
+import {EolColor} from "../enums/EolColor";
 
-    @Component
-    export default class Eol extends Vue {
-        // Props
-        @Prop({
-            required: true,
-            type: String,
-        }) id!: string;
+@Component
+export default class Eol extends Vue {
+    // Props
+    @Prop({
+        required: true,
+        type: String,
+    }) id!: string;
 
-        @Prop({
-            required: true,
-            type: String,
-        }) metric!: string;
+    @Prop({
+        required: true,
+        type: String,
+    }) metric!: string;
 
-        @Prop({
-            required: true,
-            type: String,
-        }) title!: string;
-    };
+    @Prop({
+        required: true,
+        type: String,
+    }) title!: string;
+
+    // Data
+    private eolRepository: EolRepository = EolRepository.getInstance();
+    private eols: EolType[] = [];
+
+    async getEol() {
+        const start: number = Date.now();
+        const end: number = Date.now();
+
+        this.eols = await this.eolRepository.getEol(this.metric, start, end);
+    }
+
+    getStatusClass(eol: EolType) {
+        switch (eol.color) {
+            case EolColor.RED:
+                return 'bg-red-500';
+            case EolColor.YELLOW:
+                return 'bg-yellow-500';
+            case EolColor.GREEN:
+                return 'bg-green-500';
+            case EolColor.GREY:
+                return 'bg-gray-500';
+            default:
+                return 'bg-gray-500';
+        }
+    }
+
+    mounted() {
+        this.getEol();
+    }
+};
 </script>
