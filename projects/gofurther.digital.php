@@ -82,6 +82,10 @@ return [
                 'title' => 'Disk Usage',
                 'zone' => 'main',
             ],
+            'levels' => [
+                'warning' => 60,
+                'critical' => 80,
+            ],
             'widget' => [
                 'type' => 'gauge',
                 'label' => 'mounted',
@@ -89,7 +93,7 @@ return [
         ],
         [
             'id' => 'end_of_life',
-            'metric' => 'semaphore_end_of_life',
+            'metric' => 'semaphore_eol',
             'name' => 'End of Life',
             'panel' => [
                 'className' => 'mb-4',
@@ -97,7 +101,9 @@ return [
                 'title' => 'End of Life',
                 'zone' => 'sidebar',
             ],
-            'widget' => 'eol',
+            'widget' => [
+                'type' => 'eol',
+            ],
         ],
         [
             'id' => 'global_uptime',
@@ -122,7 +128,7 @@ return [
         ],
         [
             'id' => 'last_db_backup',
-            'metric' => 'semaphore_last_db_backup',
+            'metric' => 'semaphore_last_backup_db',
             'name' => 'Last Backup (DB)',
             'panel' => [
                 'className' => 'mb-4',
@@ -130,17 +136,30 @@ return [
                 'title' => 'Last Backup (DB)',
                 'zone' => 'sidebar',
             ],
-            'widget' => 'value',
+            'widget' => [
+                'type' => 'value',
+                'transform' => [
+                    'class' => 'App\Actions\ConvertTimestampToDateAction',
+                    'method' => 'execute',
+                ],
+            ],
         ],
         [
             'id' => 'last_file_backup',
-            'metric' => 'semaphore_last_file_backup',
+            'metric' => 'semaphore_last_backup_file',
+            'name' => 'Last file Backup',
             'panel' => [
                 'order' => 2,
                 'title' => 'Last Backup (Files)',
                 'zone' => 'sidebar',
             ],
-            'widget' => 'value',
+            'widget' => [
+                'type' => 'value',
+                'transform' => [
+                    'class' => '',
+                    'method' => '',
+                ],
+            ],
         ],
         [
             'id' => 'memory_usage',

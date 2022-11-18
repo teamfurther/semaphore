@@ -92,7 +92,7 @@
         }
 
         async getTrends() {
-            this.trends = await this.trendRepository.getTrend(this.metric, this.start, this.end);
+            this.trends = await this.trendRepository.getTrend(this.metric, this.start, this.end, this.instance);
         }
 
         // Props
@@ -120,5 +120,10 @@
             required: true,
             type: Number,
         }) start!: number;
+
+        @Prop({
+            required: true,
+            type: String,
+        }) instance!: string;
     };
 </script>

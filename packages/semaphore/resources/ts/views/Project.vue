@@ -12,7 +12,8 @@
                 >
                     <component v-bind:class="check.panel.className"
                                v-bind:id="check.id"
-                               v-bind:is="check.widget"
+                               v-bind:instance="config.instance"
+                               v-bind:is="check.widget.type"
                                v-bind:key="check.id"
                                v-bind:metric="check.metric"
                                v-bind:title="check.name"
@@ -25,7 +26,8 @@
             <div class="col-span-1">
                 <component v-bind:class="check.panel.className"
                            v-bind:id="check.id"
-                           v-bind:is="check.widget"
+                           v-bind:instance="config.instance"
+                           v-bind:is="check.widget.type"
                            v-bind:key="check.id"
                            v-bind:metric="check.metric"
                            v-bind:title="check.name"

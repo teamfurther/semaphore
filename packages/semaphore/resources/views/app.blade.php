@@ -11,6 +11,6 @@
 <body class="bg-gray-50">
     <div id="app" data-app-url="{{ config('app.url') . '/' . config('semaphore.routes.prefix') }}"></div>
 
-    <script src="{{ asset('vendor/semaphore/js/app.js') }}?v2"></script>
+    <script src="{{ asset('vendor/semaphore/js/app.js') }}?v3"></script>
 </body>
 </html>
