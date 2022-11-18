@@ -12,6 +12,7 @@ return [
                     'filter' => 'process=\'total\'',
                     'max' => .9,
                     'period' => 3 * 60, // 3 minutes
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_cpu_usage',
@@ -30,9 +31,17 @@ return [
             'alerts' => [
                 [
                     'channel' => 'slack',
-                    'filter' => 'process=\'total\'',
+                    'filter' => 'process=\'read\'',
                     'max' => .9,
                     'period' => 3 * 60, // 3 minutes
+                    'snooze' => 3 * 60 * 60, // 3 hours
+                ],
+                [
+                    'channel' => 'slack',
+                    'filter' => 'process=\'write\'',
+                    'max' => .9,
+                    'period' => 3 * 60, // 3 minutes
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_disk_io',
@@ -54,12 +63,14 @@ return [
                     'filter' => 'mounted=\'/\'',
                     'max' => .8,
                     'period' => 0, // current
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/var/remote_backups\'',
                     'max' => .9,
                     'period' => 0, // current
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_disk_usage',
@@ -95,6 +106,7 @@ return [
                     'channel' => 'slack',
                     'min' => .99,
                     'period' => 24 * 60 * 60, // 1 day
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_global_uptime',
@@ -138,6 +150,7 @@ return [
                     'filter' => 'process=\'total\'',
                     'max' => .9,
                     'period' => 3 * 60, // 3 minutes
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_memory_usage',
@@ -158,6 +171,7 @@ return [
                     'channel' => 'slack',
                     'min' => 1,
                     'period' => 60, // 1 minute
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ]
             ],
             'metric' => 'semaphore_mysql_status',
@@ -178,6 +192,7 @@ return [
                     'channel' => 'slack',
                     'min' => 1,
                     'period' => 60, // 1 minute
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ],
             ],
             'metric' => 'semaphore_nginx_status',
@@ -211,6 +226,7 @@ return [
                     'channel' => 'slack',
                     'min' => .99,
                     'period' => 3 * 60, // 3 minutes
+                    'snooze' => 3 * 60 * 60, // 3 hours
                 ]
             ],
             'metric' => 'semaphore_ssl_status',
