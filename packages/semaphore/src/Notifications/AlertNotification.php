@@ -23,14 +23,6 @@ class AlertNotification extends Notification
         return ['slack'];
     }
 
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->greeting('Hello!')
-            ->line($this->message)
-            ->action('Open Semaphore', config('app.url') . '/' . config('semaphore.routes.prefix'));
-    }
-
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
