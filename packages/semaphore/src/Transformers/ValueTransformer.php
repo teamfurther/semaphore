@@ -15,7 +15,7 @@ class ValueTransformer implements TransformerInterface
         $this->getMetricProjectConfigAction = resolve(GetMetricProjectConfigAction::class);
     }
 
-    public function transform($data): ValueDTO
+    public function transform($data, bool $withTransformation = false): ValueDTO
     {
         if (empty($data['data']['result'])) {
             throw new NotFoundHttpException('Value not found');
@@ -26,6 +26,10 @@ class ValueTransformer implements TransformerInterface
         $config = $this->getMetricProjectConfigAction->execute($result['metric']['instance'], $result['metric']['__name__']);
 
         $value = $result['value'][1];
+
+        if (!$withTransformation) {
+            return new ValueDTO($value);
+        }
 
         $class = new $config['widget']['transform']['class'];
         $method = $config['widget']['transform']['method'];

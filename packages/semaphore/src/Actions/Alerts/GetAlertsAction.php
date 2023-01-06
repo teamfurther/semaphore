@@ -34,6 +34,12 @@ class GetAlertsAction implements ActionInterface
                 }
 
                 foreach ($check['alerts'] as $alert) {
+                    $widget = $check['widget'];
+
+                    if (!is_string($check['widget'])) {
+                        $widget = $widget['type'];
+                    }
+
                     $alerts[] = new AlertDTO(
                         $project['instance'],
                         $check['id'],
@@ -43,7 +49,11 @@ class GetAlertsAction implements ActionInterface
                         $alert['filter'] ?? null,
                         $alert['max'] ?? 1,
                         $alert['min'] ?? 0,
-                        $alert['period']
+                        $alert['period'],
+                        $widget,
+                        (is_array($check['widget']) && array_key_exists('transform', $check['widget']))
+                            ? $check['widget']['transform']
+                            : []
                     );
                 }
             }

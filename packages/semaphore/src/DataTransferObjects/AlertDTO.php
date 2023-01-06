@@ -11,8 +11,10 @@ class AlertDTO
     public string $channel;
     public ?string $filter;
     public float $max;
-    public float $min;
+    public float | array $min;
     public int $period;
+    public string $widget;
+    public array $transformer;
 
     public function __construct(
         string $instance,
@@ -22,8 +24,10 @@ class AlertDTO
         string $channel,
         ?string $filter,
         float $max,
-        float $min,
-        int $period
+        float | array $min,
+        int $period,
+        string $widget,
+        array $transformer = []
     ) {
         $this->instance = $instance;
         $this->id = $id;
@@ -34,5 +38,7 @@ class AlertDTO
         $this->max = $max;
         $this->min = $min;
         $this->period = $period;
+        $this->widget = $widget;
+        $this->transformer = $transformer;
     }
 }

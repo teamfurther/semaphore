@@ -28,6 +28,7 @@ class SemaphoreServiceProvider extends ServiceProvider
         // publish config
         $this->publishes([
             __DIR__ . '/../config/semaphore.php' => config_path('alerts.php'),
+            __DIR__ . '/../config/widgets.php' => config_path('widgets.php'),
         ], 'semaphore-config');
 
         // publish translation so they can be overridden
