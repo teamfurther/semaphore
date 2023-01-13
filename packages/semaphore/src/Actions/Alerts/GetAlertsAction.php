@@ -51,6 +51,7 @@ class GetAlertsAction implements ActionInterface
                         $alert['min'] ?? 0,
                         $alert['period'],
                         $widget,
+                        $alert['snooze'],
                         (is_array($check['widget']) && array_key_exists('transform', $check['widget']))
                             ? $check['widget']['transform']
                             : []

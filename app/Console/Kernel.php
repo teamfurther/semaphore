@@ -31,6 +31,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        //
+        $schedule->call('semaphore:alerts', ['process'])->everyMinute();
     }
 }

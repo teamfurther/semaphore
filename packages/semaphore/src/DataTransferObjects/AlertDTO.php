@@ -15,6 +15,7 @@ class AlertDTO
     public int $period;
     public string $widget;
     public array $transformer;
+    public int $snooze;
 
     public function __construct(
         string $instance,
@@ -27,6 +28,7 @@ class AlertDTO
         float | array $min,
         int $period,
         string $widget,
+        int $snooze,
         array $transformer = []
     ) {
         $this->instance = $instance;
@@ -39,6 +41,7 @@ class AlertDTO
         $this->min = $min;
         $this->period = $period;
         $this->widget = $widget;
+        $this->snooze = $snooze;
         $this->transformer = $transformer;
     }
 }

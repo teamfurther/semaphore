@@ -11,10 +11,14 @@ use Semaphore\Notifications\AlertNotification;
 class SendAlertNotificationAction implements ActionInterface
 {
     private AlertMessageManager $alertMessageManager;
+    private GetAlertIsSnoozedAction $getAlertIsSnoozedAction;
+    private StoreAlertSentTimeInCacheAction $storeAlertSentTimeInCacheAction;
 
     public function __construct()
     {
         $this->alertMessageManager = resolve(AlertMessageManager::class);
+        $this->getAlertIsSnoozedAction = resolve(GetAlertIsSnoozedAction::class);
+        $this->storeAlertSentTimeInCacheAction = resolve(StoreAlertSentTimeInCacheAction::class);
     }
 
     public function execute(...$args): bool
@@ -26,7 +30,10 @@ class SendAlertNotificationAction implements ActionInterface
 
         $user = new User();
 
-        $user->notify(new AlertNotification($message));
+        if (!$this->getAlertIsSnoozedAction->execute($alert)) {
+            $user->notify(new AlertNotification($message));
+            $this->storeAlertSentTimeInCacheAction->execute($alert);
+        }
 
         return true;
     }
