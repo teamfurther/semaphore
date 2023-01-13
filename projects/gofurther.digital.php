@@ -6,7 +6,7 @@ return [
     'checks' => [
         [
             'id' => 'cpu_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'total\'',
@@ -14,7 +14,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_cpu_usage',
             'name' => 'CPU Usage',
             'panel' => [
@@ -28,7 +28,7 @@ return [
         ],
         [
             'id' => 'disk_io',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'read\'',
@@ -43,7 +43,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_disk_io',
             'name' => 'Disk IO',
             'panel' => [
@@ -61,14 +61,14 @@ return [
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/\'',
-                    'max' => .8,
+                    'max' => .3,
                     'period' => 0, // current
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/var/remote_backups\'',
-                    'max' => .9,
+                    'max' => .3,
                     'period' => 0, // current
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
@@ -136,7 +136,7 @@ return [
                 'title' => 'Last Backup (DB)',
                 'zone' => 'sidebar',
             ],
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => [
@@ -155,7 +155,7 @@ return [
                     'period' => 24 * 60 * 60, // 1 day
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'widget' => [
                 'type' => 'value',
                 'transform' => [
@@ -173,14 +173,14 @@ return [
                 'title' => 'Last Backup (Files)',
                 'zone' => 'sidebar',
             ],
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => .99,
                     'period' => 24 * 60 * 60, // 1 day
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'widget' => [
                 'type' => 'value',
                 'transform' => [
@@ -191,7 +191,7 @@ return [
         ],
         [
             'id' => 'memory_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'total\'',
@@ -199,7 +199,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_memory_usage',
             'name' => 'Memory Usage',
             'panel' => [
