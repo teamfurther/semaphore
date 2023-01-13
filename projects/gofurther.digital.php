@@ -6,7 +6,7 @@ return [
     'checks' => [
         [
             'id' => 'cpu_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'total\'',
@@ -14,7 +14,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_cpu_usage',
             'name' => 'CPU Usage',
             'panel' => [
@@ -28,7 +28,7 @@ return [
         ],
         [
             'id' => 'disk_io',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'read\'',
@@ -43,7 +43,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_disk_io',
             'name' => 'Disk IO',
             'panel' => [
@@ -57,22 +57,22 @@ return [
         ],
         [
             'id' => 'disk_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/\'',
-                    'max' => .8,
+                    'max' => .3,
                     'period' => 0, // current
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/var/remote_backups\'',
-                    'max' => .9,
+                    'max' => .3,
                     'period' => 0, // current
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_disk_usage',
             'name' => 'Disk Usage',
             'panel' => [
@@ -95,6 +95,13 @@ return [
             'id' => 'end_of_life',
             'metric' => 'semaphore_eol',
             'name' => 'End of Life',
+            'alerts' => [
+               [
+                   'channel' => 'slack',
+                   'period' => 0, // current
+                   'snooze' => 3 * 60 * 60, // 3 hours
+               ],
+           ],
             'panel' => [
                 'className' => 'mb-4',
                 'order' => 0,
@@ -107,14 +114,14 @@ return [
         ],
         [
             'id' => 'global_uptime',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => .99,
                     'period' => 24 * 60 * 60, // 1 day
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_global_uptime',
             'name' => 'Global Uptime',
             'panel' => [
@@ -136,6 +143,26 @@ return [
                 'title' => 'Last Backup (DB)',
                 'zone' => 'sidebar',
             ],
+            /*'alerts' => [
+                [
+                    'channel' => 'slack',
+                    'min' => [
+                        'class' => 'Carbon\Carbon',
+                        'methods' => [
+                            [
+                                'name' => 'now',
+                                'arguments' =>  [],
+                            ],
+                            [
+                                'name' => 'getTimestamp',
+                                'arguments' => [],
+                            ],
+                        ],
+                    ],
+                    'period' => 24 * 60 * 60, // 1 day
+                    'snooze' => 3 * 60 * 60, // 3 hours
+                ],
+            ],*/
             'widget' => [
                 'type' => 'value',
                 'transform' => [
@@ -153,6 +180,14 @@ return [
                 'title' => 'Last Backup (Files)',
                 'zone' => 'sidebar',
             ],
+            /*'alerts' => [
+                [
+                    'channel' => 'slack',
+                    'min' => .99,
+                    'period' => 24 * 60 * 60, // 1 day
+                    'snooze' => 3 * 60 * 60, // 3 hours
+                ],
+            ],*/
             'widget' => [
                 'type' => 'value',
                 'transform' => [
@@ -163,7 +198,7 @@ return [
         ],
         [
             'id' => 'memory_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'process=\'total\'',
@@ -171,7 +206,7 @@ return [
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_memory_usage',
             'name' => 'Memory Usage',
             'panel' => [
@@ -185,14 +220,14 @@ return [
         ],
         [
             'id' => 'mysql_status',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => 1,
                     'period' => 60, // 1 minute
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ]
-            ],
+            ],*/
             'metric' => 'semaphore_mysql_status',
             'name' => 'MySQL Status',
             'panel' => [
@@ -206,14 +241,14 @@ return [
         ],
         [
             'id' => 'nginx_status',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => 1,
                     'period' => 60, // 1 minute
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_nginx_status',
             'name' => 'nginx Status',
             'panel' => [
@@ -240,14 +275,14 @@ return [
         ],
         [
             'id' => 'ssl_status',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'min' => .99,
                     'period' => 3 * 60, // 3 minutes
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ]
-            ],
+            ],*/
             'metric' => 'semaphore_ssl_status',
             'name' => 'SSL Status',
             'panel' => [

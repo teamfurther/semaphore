@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Semaphore\Actions\ActionInterface;
 use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
 use Semaphore\DataTransferObjects\GaugeDTO;
+use Semaphore\DataTransferObjects\PrometheusRequestDTO;
 use Semaphore\Transformers\GaugeTransformer;
 
 class GetGaugeFromPrometheusAction implements ActionInterface
@@ -26,7 +27,12 @@ class GetGaugeFromPrometheusAction implements ActionInterface
         $request = $args[0];
 
         return $this->gaugeTransformer->transform(
-            $this->getDataFromPrometheusAction->execute('query', $request)
+            $this->getDataFromPrometheusAction->execute(config('widgets.prometheus.endpoints.gauge'), new PrometheusRequestDTO(
+                $request->get('end'),
+                $request->get('instance'),
+                $request->get('metric'),
+                $request->get('start'),
+            ))
         );
     }
 }

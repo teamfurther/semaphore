@@ -3,7 +3,7 @@
 namespace Semaphore\Actions\Prometheus;
 
 use Semaphore\Actions\ActionInterface;
-use Semaphore\Http\Requests\DataRequest;
+use Semaphore\DataTransferObjects\PrometheusRequestDTO;
 use GuzzleHttp\Client;
 
 class GetDataFromPrometheusAction implements ActionInterface
@@ -23,13 +23,13 @@ class GetDataFromPrometheusAction implements ActionInterface
      */
     public function execute($endpoint = 'query_range', ...$args): array
     {
-        /** @var DataRequest $data */
+        /** @var PrometheusRequestDTO $data */
         $data = $args[0];
 
-        $metric = $data->get('metric');
-        $start = $data->get('start');
-        $end = $data->get('end');
-        $instance = $data->get('instance');
+        $metric = $data->metric;
+        $start = $data->start;
+        $end = $data->end;
+        $instance = $data->instance;
         $url = config('semaphore.prometheus.api_endpoint') . '/' . $endpoint . '?query=' . $metric . '{exported_instance="' . $instance . '"}&start=' . $start . '&end=' . $end . '&step=' . config('semaphore.prometheus.step');
 
         return json_decode($this->client->get($url)

@@ -4,7 +4,9 @@ namespace Semaphore\Actions\Value;
 
 use Semaphore\Actions\ActionInterface;
 use Semaphore\Actions\Prometheus\GetDataFromPrometheusAction;
+use Semaphore\DataTransferObjects\PrometheusRequestDTO;
 use Semaphore\DataTransferObjects\ValueDTO;
+use Semaphore\Managers\TransformerManager;
 use Semaphore\Transformers\ValueTransformer;
 
 class GetValueFromPrometheusAction implements ActionInterface
@@ -24,7 +26,13 @@ class GetValueFromPrometheusAction implements ActionInterface
         $request = $args[0];
 
         return $this->valueTransformer->transform(
-            $this->getDataFromPrometheusAction->execute('query', $request)
+            $this->getDataFromPrometheusAction->execute(config('widgets.prometheus.endpoints.value'), new PrometheusRequestDTO(
+                $request->get('end'),
+                $request->get('instance'),
+                $request->get('metric'),
+                $request->get('start'),
+            )),
+            true
         );
     }
 }

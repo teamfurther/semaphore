@@ -4,11 +4,10 @@ namespace Semaphore\Actions\Alerts;
 
 use Semaphore\Actions\ActionInterface;
 use Semaphore\Actions\Projects\GetFullProjectsConfigAction;
+use Semaphore\DataTransferObjects\AlertDTO;
 
 class GetAlertsAction implements ActionInterface
 {
-    /** @var array <string> */
-    private array $alerts = [];
     private GetFullProjectsConfigAction $getFullProjectsConfigAction;
 
     public function __construct()
@@ -16,8 +15,12 @@ class GetAlertsAction implements ActionInterface
         $this->getFullProjectsConfigAction = resolve(GetFullProjectsConfigAction::class);
     }
 
+    /**
+     * @return array<AlertDTO>
+     */
     public function execute(...$args): array
     {
+        $alerts = [];
         $projects = $this->getFullProjectsConfigAction->execute();
 
         foreach ($projects as $project) {
@@ -31,21 +34,32 @@ class GetAlertsAction implements ActionInterface
                 }
 
                 foreach ($check['alerts'] as $alert) {
-                    $this->alerts[] = [
-                        'instance' => $project['instance'],
-                        'id' => $check['id'],
-                        'metric' => $check['metric'],
-                        'name' => $check['name'],
-                        'channel' => $alert['channel'],
-                        'filter' => $alert['filter'] ?? null,
-                        'max' => $alert['max'] ?? 1,
-                        'min' => $alert['min'] ?? 0,
-                        'period' => $alert['period'],
-                    ];
+                    $widget = $check['widget'];
+
+                    if (!is_string($check['widget'])) {
+                        $widget = $widget['type'];
+                    }
+
+                    $alerts[] = new AlertDTO(
+                        $project['instance'],
+                        $check['id'],
+                        $check['metric'],
+                        $check['name'],
+                        $alert['channel'],
+                        $alert['filter'] ?? null,
+                        $alert['max'] ?? 1,
+                        $alert['min'] ?? 0,
+                        $alert['period'],
+                        $widget,
+                        $alert['snooze'],
+                        (is_array($check['widget']) && array_key_exists('transform', $check['widget']))
+                            ? $check['widget']['transform']
+                            : []
+                    );
                 }
             }
         }
 
-        return $this->alerts;
+        return $alerts;
     }
 }
