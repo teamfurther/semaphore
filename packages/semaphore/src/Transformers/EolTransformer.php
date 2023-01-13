@@ -19,13 +19,15 @@ class EolTransformer implements TransformerInterface
     {
         $result = $data['data']['result'];
 
-        return array_filter(
-            array_map(function ($item) {
-                $metric = $item['metric'];
+        return array_values(
+            array_filter(
+                array_map(function ($item) {
+                    $metric = $item['metric'];
 
-                return $this->checkProductEolStatusAction->execute($metric['series'], $metric['version']);
-            }, $result),
-            fn ($currentItem) => $currentItem
+                    return $this->checkProductEolStatusAction->execute($metric['series'], $metric['version']);
+                }, $result),
+                fn ($currentItem) => $currentItem
+            )
         );
     }
 }
