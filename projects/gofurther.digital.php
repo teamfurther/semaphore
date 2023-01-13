@@ -57,7 +57,7 @@ return [
         ],
         [
             'id' => 'disk_usage',
-            'alerts' => [
+            /*'alerts' => [
                 [
                     'channel' => 'slack',
                     'filter' => 'mounted=\'/\'',
@@ -72,7 +72,7 @@ return [
                     'period' => 0, // current
                     'snooze' => 3 * 60 * 60, // 3 hours
                 ],
-            ],
+            ],*/
             'metric' => 'semaphore_disk_usage',
             'name' => 'Disk Usage',
             'panel' => [
@@ -95,6 +95,13 @@ return [
             'id' => 'end_of_life',
             'metric' => 'semaphore_eol',
             'name' => 'End of Life',
+            'alerts' => [
+               [
+                   'channel' => 'slack',
+                   'period' => 0, // current
+                   'snooze' => 3 * 60 * 60, // 3 hours
+               ],
+           ],
             'panel' => [
                 'className' => 'mb-4',
                 'order' => 0,
