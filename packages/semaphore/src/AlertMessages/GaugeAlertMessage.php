@@ -13,16 +13,21 @@ class GaugeAlertMessage implements AlertMessageInterface
      */
     public function getMessage(AlertDTO $alert, $data): string
     {
-        $value = $data[0]->value;
         $max = $alert->max;
 
-        return sprintf(
-            __('semaphore::alerts.current.gt'),
-            $alert->instance,
-            $alert->name . ':' . $alert->filter,
-            $value * 100 . '%',
-            $max * 100 . '%',
-            Carbon::now()->addSeconds($alert->period + 1)->diffForHumans(null, true),
-        );
+        foreach ($data as $item) {
+            if ($item->value >= $max) {
+                return sprintf(
+                    __('semaphore::alerts.current.gt'),
+                    $alert->instance,
+                    $alert->name . ':' . $alert->filter,
+                    $item->value * 100 . '%',
+                    $max * 100 . '%',
+                    Carbon::now()->addSeconds($alert->period + 1)->diffForHumans(null, true),
+                );
+            }
+        }
+
+        return  '';
     }
 }

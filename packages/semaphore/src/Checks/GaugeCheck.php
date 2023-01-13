@@ -12,6 +12,12 @@ class GaugeCheck implements CheckInterface
      */
     public function check(AlertDTO $alert, $widget): bool
     {
-        return $widget[0]->value >= $alert->max;
+        foreach ($widget as $item) {
+            if ($item->value >= $alert->max) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
